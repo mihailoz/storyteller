@@ -1,0 +1,5 @@
+rs/manhut/WordByWordConfiguration.class
+rs/manhut/health/TemplateHealthCheck.class
+rs/manhut/resources/HelloWorldResource.class
+rs/manhut/api/Saying.class
+rs/manhut/WordByWordApplication.class
