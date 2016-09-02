@@ -1,5 +1,6 @@
-/home/mihailo/ManHut/JavaService/WordByWord/src/main/java/rs/manhut/api/Saying.java
-/home/mihailo/ManHut/JavaService/WordByWord/src/main/java/rs/manhut/resources/HelloWorldResource.java
-/home/mihailo/ManHut/JavaService/WordByWord/src/main/java/rs/manhut/WordByWordConfiguration.java
-/home/mihailo/ManHut/JavaService/WordByWord/src/main/java/rs/manhut/health/TemplateHealthCheck.java
-/home/mihailo/ManHut/JavaService/WordByWord/src/main/java/rs/manhut/WordByWordApplication.java
+/home/mihailo/ManHut/projects/storyteller/Storyteller/src/main/java/rs/manhut/StorytellerConfiguration.java
+/home/mihailo/ManHut/projects/storyteller/Storyteller/src/main/java/rs/manhut/health/TemplateHealthCheck.java
+/home/mihailo/ManHut/projects/storyteller/Storyteller/src/main/java/rs/manhut/api/Saying.java
+/home/mihailo/ManHut/projects/storyteller/Storyteller/src/main/java/rs/manhut/resources/WebSocketResource.java
+/home/mihailo/ManHut/projects/storyteller/Storyteller/src/main/java/rs/manhut/resources/HelloWorldResource.java
+/home/mihailo/ManHut/projects/storyteller/Storyteller/src/main/java/rs/manhut/StorytellerApplication.java
