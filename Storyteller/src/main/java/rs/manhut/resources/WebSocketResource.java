@@ -1,32 +1,48 @@
 package rs.manhut.resources;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.atmosphere.config.service.ManagedService;
+import org.atmosphere.config.service.Message;
+import org.atmosphere.config.service.PathParam;
+import org.atmosphere.config.service.Ready;
+import org.atmosphere.cpr.AtmosphereResource;
 
-import org.atmosphere.cache.UUIDBroadcasterCache;
-import org.atmosphere.client.TrackMessageSizeInterceptor;
-import org.atmosphere.config.service.AtmosphereHandlerService;
-import org.atmosphere.interceptor.AtmosphereResourceLifecycleInterceptor;
-import org.atmosphere.interceptor.BroadcastOnPostAtmosphereInterceptor;
-import org.atmosphere.interceptor.HeartbeatInterceptor;
+import javax.inject.Inject;
+import javax.ws.rs.core.Response;
+import java.util.HashMap;
+import java.util.Map;
 
-import javax.websocket.OnOpen;
-import javax.websocket.Session;
-import javax.websocket.server.ServerEndpoint;
 
 /**
  * Created by mihailo on 2.9.16..
  */
-@ServerEndpoint("/")
-@AtmosphereHandlerService(path = "/play",
-        broadcasterCache = UUIDBroadcasterCache.class,
-        interceptors = {AtmosphereResourceLifecycleInterceptor.class,
-                BroadcastOnPostAtmosphereInterceptor.class,
-                TrackMessageSizeInterceptor.class,
-                HeartbeatInterceptor.class
-        })
-public class WebSocketResource {
+@ManagedService(path = "/play/{playerId}")
+public class WebSocketResource{
 
-    @OnOpen
-    public void onOpen(final Session session) {
-        System.out.println ("WebSocket opened: " + session.getId());
+    private final ObjectMapper mapper = new ObjectMapper();
+    private static Map<String, WebSocketResource> playerSockets = new HashMap<String, WebSocketResource>();
+
+    @PathParam("playerId")
+    private String playerId;
+
+    @Inject
+    private AtmosphereResource resource;
+
+    @Ready
+    public void ready(AtmosphereResource r) {
+        WebSocketResource.playerSockets.put(playerId, this);
+    }
+
+    @Message
+    public void message(Response response) {
+
+    }
+
+    public String getPlayerId() {
+        return playerId;
+    }
+
+    public void setPlayerId(String playerId) {
+        this.playerId = playerId;
     }
 }

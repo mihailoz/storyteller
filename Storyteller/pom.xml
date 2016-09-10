@@ -10,7 +10,7 @@
     </prerequisites>
 
     <groupId>rs.manhut</groupId>
-    <artifactId>WordByWord</artifactId>
+    <artifactId>Storyteller</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
@@ -20,7 +20,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <dropwizard.version>1.0.0</dropwizard.version>
-        <atmosphere-version>2.2.0</atmosphere-version>
+        <atmosphere-version>2.4.5</atmosphere-version>
         <mainClass>rs.manhut.StorytellerApplication</mainClass>
     </properties>
 
@@ -47,11 +47,6 @@
             <version>${dropwizard.version}</version>
         </dependency>
         <dependency>
-            <groupId>javax</groupId>
-            <artifactId>javaee-api</artifactId>
-            <version>7.0</version>
-        </dependency>
-        <dependency>
             <groupId>org.atmosphere</groupId>
             <artifactId>atmosphere-runtime</artifactId>
             <version>${atmosphere-version}</version>
@@ -60,6 +55,11 @@
             <groupId>org.atmosphere</groupId>
             <artifactId>atmosphere-annotations</artifactId>
             <version>${atmosphere-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>javax</groupId>
+            <artifactId>javaee-api</artifactId>
+            <version>7.0</version>
         </dependency>
     </dependencies>
 

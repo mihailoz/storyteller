@@ -1,56 +1,20 @@
-.text-paragraph em#finishedText {
-    color: green;
-    font-style: normal;
-}
-
-.text-paragraph em#unfinishedText {
-    color: black;
-    font-style: normal;
-}
-
-.text-paragraph {
-    font-size: 16px;
-}
-
-.app-container {
+.page-wrapper {
     width: 500px;
     margin: 0 auto;
 }
 
 .page-header {
-    width: 500px;
+    width: 100%;
+    text-align: center;
     margin: 0 auto;
 }
 
-.text-container {
-    width: 500px;
-    height: 300px;
-    border: 3px solid darkgray;
-    border-radius: 10px;
-    background-color: lightgray;
-    padding: 5px;
-    margin-bottom: 30px;
+.btn-container {
+    margin: 0 auto;
 }
 
-.input-container {
-    width: 500px;
-    padding-left: 100px;
-    padding-right: 100px;
-    margin-bottom: 50px;
-}
-
-.button-container {
-    width: 500px;
-    padding-left: 150px;
-    padding-right: 150px;
-}
-
-.button-container #startButton {
+.btn-findgame {
     width: 200px;
-    font-size: 18px;
-}
-
-.incorrect {
-    border-color: red;
-    background-color: #F2A0A0;
+    background-color: gold;
+    border: 2px solid brown;
 }

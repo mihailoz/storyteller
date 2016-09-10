@@ -6,12 +6,16 @@ import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import org.atmosphere.cpr.ApplicationConfig;
 import org.atmosphere.cpr.AtmosphereServlet;
-import rs.manhut.health.TemplateHealthCheck;
-import rs.manhut.resources.HelloWorldResource;
+import rs.manhut.core.GameInstance;
+import rs.manhut.resources.GameResource;
 
 import javax.servlet.ServletRegistration;
+import java.util.ArrayList;
+import java.util.List;
 
 public class StorytellerApplication extends Application<StorytellerConfiguration> {
+
+    private List<GameInstance> gameInstanceList = new ArrayList<GameInstance>();
 
     public static void main(final String[] args) throws Exception {
         new StorytellerApplication().run(args);
@@ -30,13 +34,8 @@ public class StorytellerApplication extends Application<StorytellerConfiguration
     @Override
     public void run(final StorytellerConfiguration configuration,
                     final Environment environment) {
-        final HelloWorldResource resource = new HelloWorldResource(
-                configuration.getTemplate(),
-                configuration.getDefaultName()
-        );
+        final GameResource resource = new GameResource(this.getGameInstanceList());
 
-        final TemplateHealthCheck healthCheck = new TemplateHealthCheck(configuration.getTemplate());
-        environment.healthChecks().register("template", healthCheck);
         environment.jersey().register(resource);
         environment.jersey().setUrlPattern("/api/*");
 
@@ -47,5 +46,13 @@ public class StorytellerApplication extends Application<StorytellerConfiguration
 
         ServletRegistration.Dynamic servletHolder = environment.servlets().addServlet("Play", servlet);
         servletHolder.addMapping("/play/*");
+    }
+
+    public List<GameInstance> getGameInstanceList() {
+        return gameInstanceList;
+    }
+
+    public void setGameInstanceList(List<GameInstance> gameInstanceList) {
+        this.gameInstanceList = gameInstanceList;
     }
 }
