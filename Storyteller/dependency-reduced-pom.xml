@@ -119,7 +119,7 @@
     <mainClass>rs.manhut.StorytellerApplication</mainClass>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <atmosphere-version>2.2.0</atmosphere-version>
+    <atmosphere-version>2.4.5</atmosphere-version>
   </properties>
 </project>
 
