@@ -1,0 +1,31 @@
+<head>
+    <title>Uputstvo za storyteller</title>
+    <style>
+        body {
+            font-family: sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <h1>Uputstvo za developere</h1>
+    <h2>Za front end developere (Luka, Ognjen)</h2>
+    <p>Front end developeri su oni koji rade na klijent strani, na onome sto ce korisnici videti.
+    U slucaju ovog projekta to je html, javascript, css.. i ostalo. Najlepse je biti front end developer, ne moras da se bavis nekim ruznim error-om od 4 strane, a ipak ne mogu svi to da budu, jer je potrebno malo mozga i talenta. Ali plafon u tom poslu je dosta nizak.</p>
+    <p>Folder u kome se nalaze fajlovi koje treba menjati su <b>./Storyteller/src/main/resources/assets</b></p>
+    <p>Za pocetak treba menjati te fajlove i testirati tako sto otvorite index.html, tako ce biti za user-a.
+    Kasnije kad backend (server) bude pokrenut i radi kako treba onda treba procitati ostatak ovog uputstva,
+    kako se pokrece server i testirati direktno u aplikaciji (na kraju bi sve sto je ovde pomenuto trebali svi da znaju, da ne bude da neko nesto uci neko ne, ali za pocetak dok ne zavrsite bazirajte se samo na ovaj deo). Koristite Bootstrap, jquery i ostale biblioteke,
+    koje vam mozda zatrebaju.</p>
+    <p>To je to sto se tice uputstva, sve se svodi na poznavanje javascripta, html, css. Postavljajte pitanja jedni drugima, ukoliko ne mozete zajedno da dodjete do nekog resenja, pitajte mene. The internet is your friend.. use it!</p>
+    
+    
+    <h2>Za backend developere (Marko, Aleksa)</h2>
+    <p>Back end je samo sinonim za ono sto user ne vidi (pozadina). Ovde se vrse svi proracuni provere i sve od nekog znacaja za rad neke aplikacije. Ovako se osigurava da aplikacija bude sigurna (koliko moze biti) jer se sva logika aplikacije skriva od korisnika.</p>
+    <p>Ono sto ce nama biti potrebno je <b>java, maven, nekoliko biblioteka u java jeziku, i neki IDE</b>.</p>
+    <p><b>IDE</b> je kako to brat gugl lepo objasnjava: <i>"An integrated development environment (IDE) is a software application that provides comprehensive facilities to computer programmers for software development. An IDE normally consists of a source code editor, build automation tools and a debugger."</i> Ili ti kako to nasi vole da prevedu <i>okruzenje.</i> Sve sto ste koristili do sad u gimnazije su neke vrste (doduse nize vrste) IDE-ova, to vam je i visual studio i codeblocks, dev-cpp i sve ostalo.</p>
+    <p>Moj licni izbor, i izbor mnogih je <b>Intellij IDEA</b>. Drugi poznati su netbeans, eclipse... Intellij IDEA je vrlo poznat (top 3 sigurno), besplatan je i na njemu su kasnije bazirali zvanicni android studio za android app developing, tako da ga je vrlo korisno znati. On je dosta (ali dosta) komplikovaniji od svega sa cim ste se dosad susretali. Ako su ono bili svemirski brodovi ovo je sada DEATH STAR. Go big or go home, biAtch!</p>
+    <p>Sto se tice samo <b>Java</b>-e ona je slicna kao programski jezici koje ste vec radili ali pak sa nekim razlikama. O samoj sintaksi cu malo kasnije u ovom super-mega-giga tutorialu. Ono sto je sad bitno je compiler, postoje programski jezici ali oni nisu samo jedan programski jezik, oni se menjaju i evoluiraju tokom vremena, i svako malo neko pravi svoju verziju. Mi cemo koristiti <b>OpenJDK</b>, (jdk = Java development kit, to vam je u javi kao compiler + jos ponesto). OpenJDK je open-source, veoma rasprostranjen i znam da mozemo da ga koristimo bez ikakvih problema.</p>
+    <p><b>Znaci da rezimiramo JDK je programski jezik, compiler, IDE je samo program koji vam pomaze da kucate aplikacije, sa gomilom alatki.</b> Vas ce IDE da pita da mu locirate gde vam se nalazi JDK, da bi on mogao da ga koristi i da bi vam javljao greske, da bi mogli da pokrecete programe itd.</p>
+    <p>Maven, tesko ga je objasniti ali pokusacu, to vam je kao dodatak na Java-u, struktuira vam projekat sto pomaze kod velikih aplikacija, obradjuje dependecy-je (zavisnosti kad se prevede) znaci skida biblioteke koje koristite u programu da to ne radite rucno. Kad treba da update-ujete biblioteku samo udjete u pom.xml (konfiguracioni fajl projekta) i promenite verziju. Svaki put kad kompajlirate on skine ako vec nema te verzije koje ste naveli i postedi vam tone vremena, jer u java-i su biblioteke SVE.I imacemo ih puno... Vise o tome procitajte ovde <a href="https://maven.apache.org/guides/getting-started/maven-in-five-minutes.html" target="_blank">MAVEN</a>. Samo ovaj pocetak, ne citajte sve nije tako bitno da znate maven, sad na pocetku. Ja ga nisam znao 2 godine, a svo vreme sam ga kao koristio.</p>
+    
+</body>
