@@ -6,10 +6,7 @@ import rs.manhut.core.GameInstance;
 
 import javax.json.Json;
 import javax.json.JsonObject;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.*;
@@ -43,7 +40,7 @@ public class GameResource {
         Player p = new Player(playerId, null, defaultName);
         playersQueueing.add(p);
 
-        if(playersQueueing.size() > 4) {
+        if(playersQueueing.size() > 2) {
             GameInstance gi = new GameInstance(uid.randomUUID().toString());
 
             for(Player pl: this.getPlayersQueueing()) {
@@ -60,6 +57,107 @@ public class GameResource {
         }
 
         return Response.ok(playerId, MediaType.APPLICATION_JSON).build();
+    }
+
+    @GET
+    @Path("/status/{playerId}")
+    public Response gameStatus(@PathParam("playerId") String playerId) {
+        Boolean queueing = false;
+        JsonObject responseJson;
+
+        for(Player pl: this.getPlayersQueueing()) {
+            if(pl.getId().equals(playerId)) {
+                queueing = true;
+            }
+        }
+
+        if(queueing) {
+            responseJson = Json.createObjectBuilder()
+                            .add("status", "queueing").build();
+            return Response.ok(responseJson, MediaType.APPLICATION_JSON).build();
+        } else {
+            GameInstance game = this.getGameByPlayer(playerId);
+            Boolean onTurn = false;
+
+            if(game != null) {
+                onTurn = game.getPlayerOnTurn().getId().equals(playerId);
+                responseJson = Json.createObjectBuilder()
+                                .add("status", "inGame")
+                                .add("onTurn", onTurn.toString())
+                                .add("story", game.getStoryString()).build();
+                return Response.ok(responseJson, MediaType.APPLICATION_JSON).build();
+            } else {
+                responseJson = Json.createObjectBuilder()
+                                .add("status", "gameFinished").build();
+                return Response.ok(responseJson, MediaType.APPLICATION_JSON).build();
+            }
+        }
+    }
+
+    @POST
+    @Path("/turn/{playerId}/{word}")
+    public Response playTurn(@PathParam("playerId") String playerId,
+                             @PathParam("word") String word) {
+        Boolean queueing = false;
+        JsonObject responseJson;
+
+        for(Player pl: this.getPlayersQueueing()) {
+            if(pl.getId().equals(playerId)) {
+                queueing = true;
+            }
+        }
+
+        if(queueing) {
+            responseJson = Json.createObjectBuilder()
+                    .add("status", "queueing").build();
+            return Response.ok(responseJson, MediaType.APPLICATION_JSON).build();
+        } else {
+            GameInstance game = this.getGameByPlayer(playerId);
+            String currentStory = "";
+
+
+            if(game != null) {
+                if(game.getPlayerOnTurn().getId().equals(playerId)) {
+                    if(game.getWordCount() != 0) {
+                        currentStory = game.getStoryString() + " " + word;
+                    } else {
+                        currentStory = word;
+                    }
+                    game.setWordCount(game.getWordCount() + 1);
+                    game.setStoryString(currentStory);
+
+                    game.nextPlayer();
+                }
+            }
+
+            return Response.ok("Turn played", MediaType.TEXT_PLAIN).build();
+        }
+    }
+
+    @POST
+    @Path("/leave/{playerId}")
+    public Response playTurn(@PathParam("playerId") String playerId) {
+        Player p = null;
+        for(Player pl: this.getPlayersQueueing()) {
+            if(pl.getId().equals(playerId)) {
+                p = pl;
+            }
+        }
+        if(p != null) {
+            this.getPlayersQueueing().remove(p);
+        }
+        return Response.ok("Left queue", MediaType.TEXT_PLAIN).build();
+    }
+
+    public GameInstance getGameByPlayer(String playerId) {
+        for(GameInstance gi: this.getGameInstanceList()) {
+            for(Player pl: gi.getPlayerList()) {
+                if(pl.getId().equals(playerId)) {
+                    return gi;
+                }
+            }
+        }
+        return null;
     }
 
     public List<GameInstance> getGameInstanceList() {
