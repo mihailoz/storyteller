@@ -18,8 +18,8 @@ img {
     -webkit-box-shadow: 0 0 22px rgba(0,0,0,.5);
 }
 .imgs img {
-    -webkit-transition: all 5.3s;
+    -webkit-transition: all 4s;
 }
 .imgs.scale img {
-    -webkit-transform: scale(2.5);
+    -webkit-transform: scale(2);
 }
