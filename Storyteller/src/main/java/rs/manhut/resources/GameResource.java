@@ -136,7 +136,7 @@ public class GameResource {
 
     @POST
     @Path("/leave/{playerId}")
-    public Response playTurn(@PathParam("playerId") String playerId) {
+    public Response leaveGame(@PathParam("playerId") String playerId) {
         Player p = null;
         for(Player pl: this.getPlayersQueueing()) {
             if(pl.getId().equals(playerId)) {

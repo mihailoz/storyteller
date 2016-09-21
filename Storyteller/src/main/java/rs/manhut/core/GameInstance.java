@@ -34,8 +34,10 @@ public class GameInstance extends Thread {
 
         try {
             String result = this.getFuture().get(this.getTurnLength(), TimeUnit.SECONDS);
-        } catch (Exception e) {
+        } catch (TimeoutException e) {
             this.nextPlayer();
+        } catch (Exception e) {
+            //DO NOTHING
         }
     }
 
@@ -52,8 +54,10 @@ public class GameInstance extends Thread {
 
         try {
             String result = this.getFuture().get(this.getTurnLength(), TimeUnit.SECONDS);
-        } catch (Exception e) {
+        } catch (TimeoutException e) {
             this.nextPlayer();
+        } catch (Exception e) {
+            //DO NOTHING
         }
 
     }
