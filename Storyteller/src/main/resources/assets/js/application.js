@@ -9,14 +9,19 @@ $(function() {
                 var response = JSON.parse(data);
                 
                 if(response.status.string === "queueing") {
+                    // If in queue
                     $("#storyParagraph").text("Queueing, please wait...");
+                    
                     setTimeout(function () {
                         checkStatus();
                     }, 2000);
                 } else if(response.status.string === "inGame") {
+                    // If in game
+                    
                     if(response.onTurn.string === "true") {
+                        // If on turn
                         $("#submitButton").prop("disabled", false);
-                        console.log("Your turn :D");
+                        
                         $("#storyParagraph").text(response.story.string);
                         setTimeout(function () {
                             checkStatus();
