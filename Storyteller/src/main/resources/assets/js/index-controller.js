@@ -8,6 +8,8 @@ $(function () {
         setTimeout(function () {
             window.location.href = "inGame.html"
         }, 4000);
-        
+
     });
+
+    
 });

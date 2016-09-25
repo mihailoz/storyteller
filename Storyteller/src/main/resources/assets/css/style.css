@@ -1,29 +1,55 @@
 #startGame {
     width: 200px;
     height: 50px;
-    background-color: #B59433;
+    background-color: #8B6746;
     outline: none;
-    color: #4A3C12;
-    border: 4px solid #42350F;
+    color: #000000;
+    border: 4px solid #000000;
     border-radius: 7px;
-    font-family: cursive;
+    font-family: font;
+
     font-size: 25px;
     margin: auto;
     box-shadow: 0 1px 20px 0 #B88B39, 0px -1px 20px 0px #B88B39, 5px 0 20px 0 #733311, -5px 0 20px 0 #733311;
 }
 
 #startGame:hover {
-    background-color: #D1B35A;
+    background-color: #C39C78;
     box-shadow: 0 4px 20px 0 #B88B39, 0px -4px 20px 0px #B88B39, 15px 0 20px 0 #733311, -15px 0 20px 0 #733311;
 }
 
+#submitButton{
+  width: 150px;
+  height: 40px;
+  background-color:#AD9C7F;
+  outline: none;
+  color: #000000;
+  border: 4px solid #000000;
+  border-radius: 7px;
+
+
+  font-size: 20px;
+  margin: auto;
+
+}
+#submitButton:hover {
+    background-color: #BEB3A0;
+
+}
+.abc{
+  font-family: "Times New Roman";
+}
+
+
 .content {
+
     position: absolute;
     top: 33%;
-    width: 100%;
+    width: 98%;
 }
 
 .button-container {
+  font-family: font;
     margin: 0 auto;
     width: 200px;
 }
@@ -71,12 +97,14 @@ img {
   top: 8%;
   height: 5%;
   width: 14%;
-  background-color: rgba(250,250,250,0.9);
+  background-color: #BEB3A0;
+  border: 4px solid #000000;
+  border-radius: 7px;
   font-size: 25px;
 }
 .unesi{
   position: absolute;
-  left: 10.5%;
+  left: 9%;
   top: 16%;
   height: 4%;
   width: 6%;
@@ -88,5 +116,5 @@ img {
 }
 
 .txt {
-    font-family: font
+    font-family: font;
 }
