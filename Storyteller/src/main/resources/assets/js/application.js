@@ -22,6 +22,7 @@ $(function() {
                         // If on turn
                         $("#submitButton").prop("disabled", false);
                         $("#userInput").prop("disabled", false);
+                        $("#userInput").val("");
                         $("#userInput").focus();
                         $("#storyParagraph").text(response.story.string);
                         setTimeout(function() {
