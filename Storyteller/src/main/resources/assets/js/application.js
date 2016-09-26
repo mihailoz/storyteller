@@ -1,27 +1,27 @@
 $(function() {
     var playerId, gameActive = true;
-    
+
     var checkStatus = function () {
         $.ajax({
             url: "./play/status/" + playerId,
             dataType: "text",
             success: function (data) {
                 var response = JSON.parse(data);
-                
+
                 if(response.status.string === "queueing") {
                     // If in queue
                     $("#storyParagraph").text("Queueing, please wait...");
-                    
+
                     setTimeout(function () {
                         checkStatus();
                     }, 2000);
                 } else if(response.status.string === "inGame") {
                     // If in game
-                    
+
                     if(response.onTurn.string === "true") {
                         // If on turn
                         $("#submitButton").prop("disabled", false);
-                        
+
                         $("#storyParagraph").text(response.story.string);
                         setTimeout(function () {
                             checkStatus();
@@ -29,17 +29,18 @@ $(function() {
                         }, 8000);
                     } else {
                         $("#submitButton").prop("disabled", true);
+                        $("#userInput").prop("disabled", true);
                         $("#storyParagraph").text(response.story.string);
                         setTimeout(function () {
                             checkStatus();
                         }, 2000);
                     }
-                    
+
                 }
             }
         });
     }
-    
+
     $('#submitButton').on('click', function (e) {
         var word = $("#userInput").val();
         $.ajax({
@@ -52,14 +53,14 @@ $(function() {
             }
         });
     });
-    
-    
+
+
     // Game logistics
     var startGame = function() {
         checkStatus();
         $("#submitButton").prop("disabled", true);
     };
-    
+
     $.ajax({
         url: "./play",
         dataType: "text",
@@ -74,7 +75,7 @@ $(function() {
            type: "POST",
            url: "./play/leave/" + playerId,
            data: {}
-       }); 
+       });
     };
-    
+
 });
