@@ -22,15 +22,17 @@ $(function() {
                         // If on turn
                         $("#submitButton").prop("disabled", false);
                         $("#userInput").prop("disabled", false);
-                        $("#userInput").val("");
                         $("#userInput").focus();
+                        
                         $("#storyParagraph").text(response.story.string);
+                        
                         setTimeout(function() {
                             checkStatus();
                         }, 700);
                     } else {
                         $("#submitButton").prop("disabled", true);
                         $("#userInput").prop("disabled", true);
+                        $("#userInput").val("");
                         $("#storyParagraph").text(response.story.string);
                         setTimeout(function() {
                             checkStatus();
@@ -50,6 +52,7 @@ $(function() {
             data: {},
             success: function(data) {
                 $("#submitButton").prop("disabled", true);
+                $("#userInput").val("");
             }
         });
     });
