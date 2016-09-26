@@ -22,6 +22,7 @@ $(function() {
                         // If on turn
                         $("#submitButton").prop("disabled", false);
                         $("#userInput").prop("disabled", false);
+                        $("#submitButton").prop("disabled", false);
                         $("#userInput").val("");
                         $("#userInput").focus();
                         $("#storyParagraph").text(response.story.string);
@@ -30,6 +31,7 @@ $(function() {
                         }, 700);
                     } else {
                         $("#submitButton").prop("disabled", true);
+                        $("#pollButton").prop("disabled", true);
                         $("#userInput").prop("disabled", true);
                         $("#storyParagraph").text(response.story.string);
                         setTimeout(function() {
@@ -54,7 +56,9 @@ $(function() {
         });
     });
 
-
+    $("#pollButton").on('click', function () {
+      $('#myModal').modal("show");
+    });
     // Game logistics
     var startGame = function() {
         checkStatus();

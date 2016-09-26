@@ -8,6 +8,7 @@
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
+    <script type="text/javascript" src="./js/bootstrap.js"></script>
 
 
 </head>
@@ -17,15 +18,38 @@
     <div id="imgs" class="imgs">
         <img src="playscreen.jpg" class="fit center" alt="slika" />
         <div contenteditable="true">
-          <textarea name="txtarea" class="txt"  id="storyParagraph" disabled ></textarea>
+            <textarea name="txtarea" class="txt" id="storyParagraph" disabled></textarea>
         </div>
-    </div >
+    </div>
     <input id="userInput" class="inp" type="text" autofocus>
 
-    <button type="button" id="submitButton" class="unesi" name="button"><div class="abc">
+    <button type="button" id="submitButton" class="unesi" name="button">
           submit
-        </div></button>
+    </button>
 
+    <button type="button" id="pollButton" class="poll" name="button">
+              end game vote
+    </button>
+
+    <div id="myModal" class="modal fade" role="dialog">
+      <div class="modal-dialog modal-lg">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Modal Header</h4>
+          </div>
+          <div class="modal-body">
+            <p></p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
 
 
 </body>
