@@ -80,7 +80,7 @@ public class GameResource {
             GameInstance game = this.getGameByPlayer(playerId);
             Boolean onTurn = false;
 
-            if(game != null) {
+            if(game != null && game.getPlayerIndex() > -1) {
                 onTurn = game.getPlayerOnTurn().getId().equals(playerId);
                 responseJson = Json.createObjectBuilder()
                                 .add("status", "inGame")
@@ -88,6 +88,10 @@ public class GameResource {
                                 .add("story", game.getStoryString()).build();
                 return Response.ok(responseJson, MediaType.APPLICATION_JSON).build();
             } else {
+                if(game != null) {
+                    this.getGameInstanceList().remove(game);
+                }
+
                 responseJson = Json.createObjectBuilder()
                                 .add("status", "gameFinished").build();
                 return Response.ok(responseJson, MediaType.APPLICATION_JSON).build();

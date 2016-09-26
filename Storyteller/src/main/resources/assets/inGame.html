@@ -8,6 +8,7 @@
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
+    <script type="text/javascript" src="./js/bootstrap.js"></script>
 
 
 </head>
@@ -17,14 +18,32 @@
     <div id="imgs" class="imgs">
         <img src="playscreen.jpg" class="fit center" alt="slika" />
         <div contenteditable="true">
-          <textarea name="txtarea" class="txt"  id="storyParagraph" disabled ></textarea>
+            <textarea name="txtarea" class="txt" id="storyParagraph" disabled></textarea>
         </div>
-    </div >
+    </div>
     <input id="userInput" class="inp" type="text" autofocus>
 
-    <button type="button" id="submitButton" class="unesi" name="button"><div class="abc">
+    <button type="button" id="submitButton" class="unesi" name="button">
           submit
-        </div></button>
+    </button>
+
+    <button type="button" id="pollButton" class="poll" name="button">
+              end game vote
+    </button>
+
+    <div id="myModal" class="modal fade mojmodalsve" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content mojmodal">
+                <center>
+                    <button type="button" class="btn myButton" id="pollYes" data-dismiss="modal">yes</button>
+                    <button type="button" class="btn myButton" id="pollNo" data-dismiss="modal">no</button>
+                </center>
+                <center><p id="modalpara">
+                  would you like to end game?
+                </p></center>
+            </div>
+        </div>
+    </div>
 
 
 

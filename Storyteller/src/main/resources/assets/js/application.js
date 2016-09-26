@@ -31,6 +31,7 @@ $(function() {
                         }, 700);
                     } else {
                         $("#submitButton").prop("disabled", true);
+                        $("#pollButton").prop("disabled", true);
                         $("#userInput").prop("disabled", true);
                         $("#userInput").val("");
                         $("#storyParagraph").text(response.story.string);
@@ -45,6 +46,7 @@ $(function() {
     }
 
     $('#submitButton').on('click', function(e) {
+        $("#userInput").val("");
         var word = $("#userInput").val();
         $.ajax({
             type: "POST",
@@ -57,7 +59,9 @@ $(function() {
         });
     });
 
-
+    $("#pollButton").on('click', function() {
+        $('#myModal').modal("show");
+    });
     // Game logistics
     var startGame = function() {
         checkStatus();
