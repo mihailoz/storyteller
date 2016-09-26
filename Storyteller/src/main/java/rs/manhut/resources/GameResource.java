@@ -118,21 +118,40 @@ public class GameResource {
 
 
             if(game != null) {
-                if(game.getPlayerOnTurn().getId().equals(playerId)) {
-                    if(game.getWordCount() != 0) {
-                        currentStory = game.getStoryString() + " " + word;
-                    } else {
-                        currentStory = word;
-                    }
-                    game.setWordCount(game.getWordCount() + 1);
-                    game.setStoryString(currentStory);
+                if(game.getPollActive()) {
+                    Response.ok("endGamePoll", MediaType.TEXT_PLAIN).build();
+                }
 
-                    game.nextPlayer();
+                if(game.getPlayerOnTurn().getId().equals(playerId)) {
+                    if(word.equals("end-of-game-poll")) {
+                        game.nextPlayer(true);
+                    } else {
+                        if (game.getWordCount() != 0) {
+                            currentStory = game.getStoryString() + " " + word;
+                        } else {
+                            currentStory = word;
+                        }
+                        game.setWordCount(game.getWordCount() + 1);
+                        game.setStoryString(currentStory);
+
+                        game.nextPlayer();
+                    }
                 }
             }
 
             return Response.ok("Turn played", MediaType.TEXT_PLAIN).build();
         }
+    }
+
+    @POST
+    @Path("/poll/{playerId}/{vote}")
+    public Response pollVote(@PathParam("playerId") String playerId,
+                             @PathParam("playerId") String vote) {
+        GameInstance game = this.getGameByPlayer(playerId);
+
+        game.submitVote(playerId, vote);
+
+        return Response.ok("Vote submited", MediaType.TEXT_PLAIN).build();
     }
 
     @POST

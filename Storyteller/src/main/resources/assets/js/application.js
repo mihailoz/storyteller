@@ -14,7 +14,7 @@ $(function() {
 
                     setTimeout(function() {
                         checkStatus();
-                    }, 2000);
+                    }, 700);
                 } else if (response.status.string === "inGame") {
                     // If in game
 
@@ -27,15 +27,14 @@ $(function() {
                         $("#storyParagraph").text(response.story.string);
                         setTimeout(function() {
                             checkStatus();
-                            $("#submitButton").prop("disabled", true);
-                        }, 8000);
+                        }, 700);
                     } else {
                         $("#submitButton").prop("disabled", true);
                         $("#userInput").prop("disabled", true);
                         $("#storyParagraph").text(response.story.string);
                         setTimeout(function() {
                             checkStatus();
-                        }, 2000);
+                        }, 700);
                     }
 
                 }
@@ -51,7 +50,6 @@ $(function() {
             data: {},
             success: function(data) {
                 $("#submitButton").prop("disabled", true);
-                checkStatus();
             }
         });
     });

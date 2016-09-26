@@ -1,6 +1,7 @@
 package rs.manhut.core;
 
 import rs.manhut.cli.Player;
+import rs.manhut.cli.Poll;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +18,10 @@ public class GameInstance extends Thread {
     private Integer playerIndex;
     private Integer wordCount;
     private Future<String> future;
+
     private ExecutorService executor = Executors.newSingleThreadExecutor();
+    private List<Poll> endGamePoll;
+    private Boolean pollActive = false;
 
     private static Integer turnLength = 9;
 
@@ -42,22 +46,79 @@ public class GameInstance extends Thread {
     }
 
     public void nextPlayer() {
-        Integer nextPlayer = (this.getPlayerIndex() + 1) % this.getPlayerList().size();
-        this.setPlayerIndex(nextPlayer);
-        this.setPlayerOnTurn(this.getPlayerList().get(nextPlayer));
+        nextPlayer(false);
+    }
 
-        if(this.getFuture() != null) {
+    public void nextPlayer(Boolean isPoll) {
+        if (this.getFuture() != null) {
             this.getFuture().cancel(true);
         }
 
         this.setFuture(executor.submit(new PlayerTurn()));
 
-        try {
-            String result = this.getFuture().get(this.getTurnLength(), TimeUnit.SECONDS);
-        } catch (TimeoutException e) {
-            this.nextPlayer();
-        } catch (Exception e) {
-            //DO NOTHING
+        if(isPoll == false) {
+            Integer nextPlayer = (this.getPlayerIndex() + 1) % this.getPlayerList().size();
+            this.setPlayerIndex(nextPlayer);
+            this.setPlayerOnTurn(this.getPlayerList().get(nextPlayer));
+
+            try {
+                String result = this.getFuture().get(this.getTurnLength(), TimeUnit.SECONDS);
+            } catch (TimeoutException e) {
+                this.nextPlayer();
+            } catch (Exception e) {
+                //DO NOTHING
+            }
+        } else {
+            this.setEndGamePoll(new ArrayList<Poll>());
+
+            for(Player pl: this.getPlayerList()) {
+                Poll tmp = new Poll(pl);
+
+                this.getEndGamePoll().add(tmp);
+            }
+
+            try {
+                this.setPollActive(true);
+                String result = this.getFuture().get(this.getTurnLength(), TimeUnit.SECONDS);
+            } catch (TimeoutException e) {
+                this.setPollActive(false);
+
+                Integer forEndGame = 0;
+                Integer againstEndGame = 0;
+
+                for(Poll p: this.getEndGamePoll()) {
+                    if(p.getVote() == true) forEndGame++;
+                    if(p.getVote() == false) forEndGame++;
+                }
+
+                if(forEndGame > againstEndGame) {
+                    this.setPlayerOnTurn(null);
+                    this.setPlayerIndex(-1);
+                } else {
+                    this.nextPlayer();
+                }
+            } catch (Exception e) {
+                //DO NOTHING
+            }
+        }
+    }
+
+    public void submitVote(String playerId, String vote) {
+        Boolean voteValue;
+        if(vote.equals("endGame")) {
+            voteValue = true;
+        } else {
+            voteValue = false;
+        }
+
+        if(this.getPollActive()) {
+            for(Poll p: this.getEndGamePoll()) {
+                if(p.getP().getId().equals(playerId)) {
+                    if(p.getVote() != null) {
+                        p.setVote(voteValue);
+                    }
+                }
+            }
         }
 
     }
@@ -136,6 +197,22 @@ public class GameInstance extends Thread {
 
     public static void setTurnLength(Integer turnLength) {
         GameInstance.turnLength = turnLength;
+    }
+
+    public List<Poll> getEndGamePoll() {
+        return endGamePoll;
+    }
+
+    public void setEndGamePoll(List<Poll> endGamePoll) {
+        this.endGamePoll = endGamePoll;
+    }
+
+    public Boolean getPollActive() {
+        return pollActive;
+    }
+
+    public void setPollActive(Boolean pollActive) {
+        this.pollActive = pollActive;
     }
 }
 

@@ -1,3 +1,20 @@
 1.spojiti Maticev trie(provera reci sve vezano za unos teksta)
 2.queue(izmedju prve i druge strane)
 3.vreme,povezivanje sa serverom (the miki part)
+
+4. Srediti button-e, pogledajte na netu sledece stvari:
+    - Border
+    - Shadow
+    - Background
+    - :hover, :disabled... (da menja izgled kad je hovered, disabled)
+    Napravite da lici na nesto i da se uklapa u temu, potrudite se, i dobro izucite navedene stvari (ne samo osnovno, vec advanced mogucnosti)
+    da ne biste crtali u photoshop-u tako nije recommended
+
+5. Isto ovo gore i za inpute
+6. Kad ovo zavrsite pogledajte na sta lici preko mobilnog, procitajte na netu kako se simulira mobilni u chrome-u jako je jednostavno
+7. Promeniti u textarea
+8. footer sa manhut podacimo i kopirajt
+9. Kad se zavrsi TRIE napraviti dropdown sa suggested recima
+10. Kada user nije na potezu treba da mu se disableuje sve, kada jeste na potezu treba
+    da promeni boju u nesto jarko da je jasno da je na potezu.
+11. Zakupiti domen, server
