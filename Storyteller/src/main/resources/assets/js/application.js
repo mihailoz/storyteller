@@ -23,7 +23,6 @@ $(function() {
                         $("#submitButton").prop("disabled", false);
                         $("#userInput").prop("disabled", false);
                         $("#submitButton").prop("disabled", false);
-                        $("#userInput").val("");
                         $("#userInput").focus();
                         $("#storyParagraph").text(response.story.string);
                         setTimeout(function() {
@@ -45,6 +44,7 @@ $(function() {
     }
 
     $('#submitButton').on('click', function(e) {
+        $("#userInput").val("");
         var word = $("#userInput").val();
         $.ajax({
             type: "POST",
@@ -56,8 +56,8 @@ $(function() {
         });
     });
 
-    $("#pollButton").on('click', function () {
-      $('#myModal').modal("show");
+    $("#pollButton").on('click', function() {
+        $('#myModal').modal("show");
     });
     // Game logistics
     var startGame = function() {
