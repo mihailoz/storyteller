@@ -36,6 +36,10 @@
 #submitButton:disabled {
   background-color: #594432;
 }
+#submitButton:disabled:hover {
+  background-color: #594432;
+}
+
 #submitButton:hover {
     background-color: #BEB3A0;
 
