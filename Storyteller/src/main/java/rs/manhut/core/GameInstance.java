@@ -87,8 +87,10 @@ public class GameInstance extends Thread {
                 Integer againstEndGame = 0;
 
                 for(Poll p: this.getEndGamePoll()) {
-                    if(p.getVote() == true) forEndGame++;
-                    if(p.getVote() == false) forEndGame++;
+                    if (p.getVote() != null) {
+                        if (p.getVote() == true) forEndGame++;
+                        if (p.getVote() == false) forEndGame++;
+                    }
                 }
 
                 if(forEndGame > againstEndGame) {

@@ -33,16 +33,14 @@
   margin: auto;
 
 }
-#submitButton:disabled {
-  background-color: #594432;
-}
+
+#submitButton:disabled,
 #submitButton:disabled:hover {
   background-color: #594432;
 }
 
 #submitButton:hover {
     background-color: #BEB3A0;
-
 }
 
 
@@ -164,7 +162,8 @@ img {
 
 }
 
-#pollButton:disabled:hover {
+#pollButton:disabled:hover,
+#pollButton:disabled {
   background-color: #594432;
 }
 

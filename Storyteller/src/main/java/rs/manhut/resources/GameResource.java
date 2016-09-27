@@ -123,11 +123,11 @@ public class GameResource {
 
             if(game != null) {
                 if(game.getPollActive()) {
-                    Response.ok("endGamePoll", MediaType.TEXT_PLAIN).build();
+                    return Response.ok("endGamePoll", MediaType.TEXT_PLAIN).build();
                 }
 
                 if(game.getPlayerOnTurn().getId().equals(playerId)) {
-                    if(word.equals("end-of-game-poll")) {
+                    if(word.equals("endOfGamePoll")) {
                         game.nextPlayer(true);
                     } else {
                         if (game.getWordCount() != 0) {
@@ -155,7 +155,7 @@ public class GameResource {
 
         game.submitVote(playerId, vote);
 
-        return Response.ok("Vote submited", MediaType.TEXT_PLAIN).build();
+        return Response.ok("Vote submitted", MediaType.TEXT_PLAIN).build();
     }
 
     @POST

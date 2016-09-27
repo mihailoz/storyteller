@@ -21,6 +21,7 @@ $(function() {
                     if (response.onTurn.string === "true") {
                         // If on turn
                         $("#submitButton").prop("disabled", false);
+                        $("#pollButton").prop("disabled", false);
                         $("#userInput").prop("disabled", false);
                         $("#userInput").focus();
                         
@@ -29,7 +30,7 @@ $(function() {
                         setTimeout(function() {
                             checkStatus();
                         }, 700);
-                    } else {
+                    } else if(response.onTurn.string === "false") {
                         $("#submitButton").prop("disabled", true);
                         $("#pollButton").prop("disabled", true);
                         $("#userInput").prop("disabled", true);
@@ -38,15 +39,23 @@ $(function() {
                         setTimeout(function() {
                             checkStatus();
                         }, 700);
+                    } else if(response.onTurn.string === "endGamePoll") {
+                        if(!($('#myModal').hasClass('in'))) {
+                            $('#myModal').modal("show");
+                        }
+                        setTimeout(function() {
+                            checkStatus();
+                        }, 700);
                     }
 
+                } else if (response.status.string === "gameFinished") {
+                    console.log("Game finished");
                 }
             }
         });
     }
 
     $('#submitButton').on('click', function(e) {
-        $("#userInput").val("");
         var word = $("#userInput").val();
         $.ajax({
             type: "POST",
@@ -54,14 +63,23 @@ $(function() {
             data: {},
             success: function(data) {
                 $("#submitButton").prop("disabled", true);
+                $("#pollButton").prop("disabled", true);
                 $("#userInput").val("");
             }
         });
     });
 
     $("#pollButton").on('click', function() {
-        $('#myModal').modal("show");
+        $.ajax({
+            type: "POST",
+            url: "./play/turn/" + playerId + "/endOfGamePoll",
+            data: {},
+            success: function(data) {
+                $('#myModal').modal("show");
+            }
+        });
     });
+    
     // Game logistics
     var startGame = function() {
         checkStatus();
