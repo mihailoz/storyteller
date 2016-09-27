@@ -16,22 +16,30 @@
 <body>
 
     <div id="imgs" class="imgs">
-        <img src="playscreen.jpg" class="fit center" alt="slika" />
-        <div contenteditable="true">
-            <textarea name="txtarea" class="txt" id="storyParagraph" disabled></textarea>
-        </div>
-    </div>
-    <input id="userInput" class="inp" type="text" autofocus>
 
-    <button type="button" id="submitButton" class="unesi" name="button">
+            <textarea name="txtarea" class="txt" id="storyParagraph" disabled></textarea>
+
+    </div>
+
+
+        <input id="userInput" class="inp" type="text" autofocus>
+
+        <button type="button" id="submitButton" class="unesi" name="button">
           submit
     </button>
 
-    <button type="button" id="pollButton" class="poll" name="button">
+        <button type="button" id="pollButton" class="poll" name="button">
               end game vote
     </button>
 
-    
+
+        <div class="tajmer">
+            <p id="tajmer"></p>
+        </div>
+
+    <div class="manhut">
+        2016 ManHut,Studios
+    </div>
     <div id="myModal" class="modal fade mojmodalsve" role="dialog">
         <div class="modal-dialog modal-sm">
             <div class="modal-content mojmodal">
@@ -39,9 +47,11 @@
                     <button type="button" class="btn myButton" id="pollYes" data-dismiss="modal">yes</button>
                     <button type="button" class="btn myButton" id="pollNo" data-dismiss="modal">no</button>
                 </center>
-                <center><p id="modalpara">
-                  would you like to end game?
-                </p></center>
+                <center>
+                    <p id="modalpara">
+                        would you like to end game?
+                    </p>
+                </center>
             </div>
         </div>
     </div>

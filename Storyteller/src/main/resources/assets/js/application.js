@@ -1,5 +1,16 @@
 $(function() {
     var playerId, gameActive = true;
+    var tajmer = false;
+
+    var timerFunc = function (br) {
+        console.log(br);
+        $("#tajmer").text(br);
+        if(br > 0) {
+            setTimeout(function () {
+                timerFunc(br-1);
+            }, 1000);
+        }
+    }
 
     var checkStatus = function() {
         $.ajax({
@@ -20,35 +31,47 @@ $(function() {
 
                     if (response.onTurn.string === "true") {
                         // If on turn
+
+
+                       if(tajmer===false){
+                          $(".tajmer").show();
+                          timerFunc(8);
+                       }
+                        tajmer=true;
                         $("#submitButton").prop("disabled", false);
                         $("#pollButton").prop("disabled", false);
                         $("#userInput").prop("disabled", false);
                         $("#userInput").focus();
-                        
+
                         $("#storyParagraph").text(response.story.string);
-                        
+
                         setTimeout(function() {
                             checkStatus();
                         }, 700);
                     } else if(response.onTurn.string === "false") {
+                        $(".tajmer").hide();
                         $("#submitButton").prop("disabled", true);
                         $("#pollButton").prop("disabled", true);
                         $("#userInput").prop("disabled", true);
                         $("#userInput").val("");
                         $("#storyParagraph").text(response.story.string);
+                        tajmer = false;
                         setTimeout(function() {
                             checkStatus();
                         }, 700);
                     } else if(response.onTurn.string === "endGamePoll") {
+                        $(".tajmer").hide();
                         if(!($('#myModal').hasClass('in'))) {
                             $('#myModal').modal("show");
                         }
+                        tajmer = false;
                         setTimeout(function() {
                             checkStatus();
                         }, 700);
                     }
 
                 } else if (response.status.string === "gameFinished") {
+                    $("#tajmer").hide();
                     console.log("Game finished");
                 }
             }
@@ -62,6 +85,7 @@ $(function() {
             url: "./play/turn/" + playerId + "/" + word,
             data: {},
             success: function(data) {
+                $(".tajmer").hide();
                 $("#submitButton").prop("disabled", true);
                 $("#pollButton").prop("disabled", true);
                 $("#userInput").val("");
@@ -79,7 +103,7 @@ $(function() {
             }
         });
     });
-    
+
     // Game logistics
     var startGame = function() {
         checkStatus();
