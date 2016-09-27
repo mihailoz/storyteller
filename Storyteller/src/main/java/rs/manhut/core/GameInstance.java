@@ -76,9 +76,9 @@ public class GameInstance extends Thread {
 
                 this.getEndGamePoll().add(tmp);
             }
+            this.setPollActive(true);
 
             try {
-                this.setPollActive(true);
                 String result = this.getFuture().get(this.getTurnLength(), TimeUnit.SECONDS);
             } catch (TimeoutException e) {
                 this.setPollActive(false);

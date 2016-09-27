@@ -40,7 +40,7 @@ public class GameResource {
         Player p = new Player(playerId, null, defaultName);
         playersQueueing.add(p);
 
-        if(playersQueueing.size() > 2) {
+        if(playersQueueing.size() > 1) {
             GameInstance gi = new GameInstance(uid.randomUUID().toString());
 
             //TODO for first n players
@@ -82,11 +82,19 @@ public class GameResource {
 
             if(game != null && game.getPlayerIndex() > -1) {
                 onTurn = game.getPlayerOnTurn().getId().equals(playerId);
-                responseJson = Json.createObjectBuilder()
-                                .add("status", "inGame")
-                                .add("onTurn", onTurn.toString())
-                                .add("story", game.getStoryString()).build();
-                return Response.ok(responseJson, MediaType.APPLICATION_JSON).build();
+                if(!game.getPollActive()) {
+                    responseJson = Json.createObjectBuilder()
+                            .add("status", "inGame")
+                            .add("onTurn", onTurn.toString())
+                            .add("story", game.getStoryString()).build();
+                    return Response.ok(responseJson, MediaType.APPLICATION_JSON).build();
+                } else {
+                    responseJson = Json.createObjectBuilder()
+                            .add("status", "inGame")
+                            .add("onTurn", "endGamePoll")
+                            .add("story", game.getStoryString()).build();
+                    return Response.ok(responseJson, MediaType.APPLICATION_JSON).build();
+                }
             } else {
                 if(game != null) {
                     this.getGameInstanceList().remove(game);
@@ -128,7 +136,13 @@ public class GameResource {
 
                 if(game.getPlayerOnTurn().getId().equals(playerId)) {
                     if(word.equals("endOfGamePoll")) {
-                        game.nextPlayer(true);
+                        Runnable turn = new Runnable () {
+                            public void run() {
+                                game.nextPlayer(true);
+                            }
+                        };
+
+                        new Thread(turn).start();
                     } else {
                         if (game.getWordCount() != 0) {
                             currentStory = game.getStoryString() + " " + word;
@@ -138,7 +152,13 @@ public class GameResource {
                         game.setWordCount(game.getWordCount() + 1);
                         game.setStoryString(currentStory);
 
-                        game.nextPlayer();
+                        Runnable turn = new Runnable () {
+                            public void run() {
+                                game.nextPlayer();
+                            }
+                        };
+
+                        new Thread(turn).start();
                     }
                 }
             }
@@ -150,7 +170,7 @@ public class GameResource {
     @POST
     @Path("/poll/{playerId}/{vote}")
     public Response pollVote(@PathParam("playerId") String playerId,
-                             @PathParam("playerId") String vote) {
+                             @PathParam("vote") String vote) {
         GameInstance game = this.getGameByPlayer(playerId);
 
         game.submitVote(playerId, vote);
