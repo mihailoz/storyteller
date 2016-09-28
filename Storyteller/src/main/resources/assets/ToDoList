@@ -1,21 +1,16 @@
-1.spojiti Maticev trie(provera reci sve vezano za unos teksta)
-2.queue(izmedju prve i druge strane)
-3.vreme,povezivanje sa serverom (the miki part)
-
-4. Srediti button-e, pogledajte na netu sledece stvari:
-    - Border
-    - Shadow
-    - Background
-    - :hover, :disabled... (da menja izgled kad je hovered, disabled)
-    Napravite da lici na nesto i da se uklapa u temu, potrudite se, i dobro izucite navedene stvari (ne samo osnovno, vec advanced mogucnosti)
-    da ne biste crtali u photoshop-u tako nije recommended
-
-5. Isto ovo gore i za inpute
-6. Kad ovo zavrsite pogledajte na sta lici preko mobilnog, procitajte na netu kako se simulira mobilni u chrome-u jako je jednostavno
-
-9. Kad se zavrsi TRIE napraviti dropdown sa suggested recima
-
-11. Zakupiti domen, server
-
-
-14. Dodati tajmer
+MIHAILO:
+    - Podesiti server - kad dodje vreme za to
+    - Pripremiti server za produkciju
+    - Server-side kod za dropdown sa recima
+ALEKSA:
+    - Ubaciti TRIE, istestirati jos jednom (Miki ce pomoci :D)
+    - Smisliti kako da poubacujemo sve dank memes reci
+MARKO:
+    - Razmisliti sta treba da se desi kad se zavrsi igra
+    - Videti kako ubaciti share button-e za facebook/twitter (aleksa neka uleti kad ubacimo TRIE)
+LUKA:
+    - Background inGame
+    - Ikonica igre
+OGNJEN:
+    - Rules board na pocetku
+    - Pomoci rutketu gde treba
