@@ -211,3 +211,16 @@ img {
     font-family: font;
     font-size: 24px;
 }
+
+#rules{
+  position: absolute;
+  left: 70%;
+  top: 25%;
+  width: 25%;
+  height: 38%;
+  background-color: rgba(74, 65, 48, 0.55);
+  color: black;
+  border: none;
+  font-family: font;
+  font-size: 20px;
+}
