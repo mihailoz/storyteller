@@ -37,7 +37,7 @@ body {
     padding: 5px 20px;
     width: 14%;
     color: black;
-    background-color: #BEB3A0;
+    background-color: #AC8F63  ;
     border: 4px solid #000000;
     border-radius: 7px;
     font-size: 20px;
@@ -52,7 +52,7 @@ body {
     /*width: 7.8%;*/
     position: absolute;
     padding: 5px 50px ;
-    background-color: #AD9C7F;
+    background-color: #AC8F63  ;
     outline: none;
     color: #000000;
     border: 4px solid #000000;
@@ -74,7 +74,7 @@ body {
 
 #pollButton {
     padding: 5px 50px ;
-    background-color: #AD9C7F;
+    background-color: #AC8F63  ;
     outline: none;
     color: #000000;
     border: 4px solid #000000;
@@ -141,8 +141,8 @@ img {
 .txt {
     background-color: rgba(0, 0, 0, 0);
     position: absolute;
-    left: 35%;
-    top: 8.1%;
+    left: 36%;
+    top: 15%;
     width: 22%;
     height: 60%;
     font-size: 18px;
@@ -153,9 +153,34 @@ img {
 }
 
 
+#rules{
+  position: absolute;
+  left: 2%;
+  top: 4%;
+  padding: 10px 10px;
+  width: 21%;
+  height: 57%;
+  border: 20px solid #000000;
+  border-radius: 20px;
+  background-color: rgba(255, 255, 255, 0.55);
+  color: black;
+  border: none;
+  font-family: font;
+  font-size: 20px;
+  border: none;
+  resize: none;
 
+}
 
+.fit{
+  height: 100%;
+  width: 100%;
+}
 
+.center {
+  display: block;
+  margin: auto;
+}
 @font-face {
     font-family: font;
     src: url('font2.ttf');
@@ -215,17 +240,4 @@ img {
     margin-top: 20px;
     font-family: font;
     font-size: 24px;
-}
-
-#rules{
-  position: absolute;
-  left: 70%;
-  top: 25%;
-  width: 25%;
-  height: 44%;
-  background-color: rgba(74, 65, 48, 0.65);
-  color: black;
-  border: none;
-  font-family: font;
-  font-size: 20px;
 }
