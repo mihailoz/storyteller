@@ -12,6 +12,10 @@ $(function() {
         }
     }
 
+    $('#startGame').click(function(){
+      $("#rules").fadeOut(2200);
+    });
+
     var checkStatus = function() {
         $.ajax({
             url: "./play/status/" + playerId,
