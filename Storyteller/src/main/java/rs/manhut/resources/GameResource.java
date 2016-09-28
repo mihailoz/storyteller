@@ -173,7 +173,9 @@ public class GameResource {
                              @PathParam("vote") String vote) {
         GameInstance game = this.getGameByPlayer(playerId);
 
-        game.submitVote(playerId, vote);
+        if(game != null) {
+            game.submitVote(playerId, vote);
+        }
 
         return Response.ok("Vote submitted", MediaType.TEXT_PLAIN).build();
     }

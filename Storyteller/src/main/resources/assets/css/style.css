@@ -82,12 +82,12 @@ body {
     top: 61%;
 }
 .tajmer{
+    display: block;
     position: absolute;
     padding: 5px 40px;
     top: 40%;
     left: 11%;
     width: 20%;
-
     font-size: 40px;
 }
 #pollButton:hover {

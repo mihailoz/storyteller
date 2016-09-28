@@ -81,7 +81,7 @@ public class GameInstance extends Thread {
             try {
                 String result = this.getFuture().get(this.getTurnLength(), TimeUnit.SECONDS);
             } catch (TimeoutException e) {
-                this.setPollActive(false);
+                    this.setPollActive(false);
 
                 Integer forEndGame = 0;
                 Integer againstEndGame = 0;
@@ -89,7 +89,7 @@ public class GameInstance extends Thread {
                 for(Poll p: this.getEndGamePoll()) {
                     if (p.getVote() != null) {
                         if (p.getVote() == true) forEndGame++;
-                        if (p.getVote() == false) forEndGame++;
+                        if (p.getVote() == false) againstEndGame++;
                     }
                 }
 
@@ -116,7 +116,7 @@ public class GameInstance extends Thread {
         if(this.getPollActive()) {
             for(Poll p: this.getEndGamePoll()) {
                 if(p.getP().getId().equals(playerId)) {
-                    if(p.getVote() != null) {
+                    if(p.getVote() == null) {
                         p.setVote(voteValue);
                     }
                 }

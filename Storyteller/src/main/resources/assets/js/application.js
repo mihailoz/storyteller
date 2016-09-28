@@ -1,13 +1,13 @@
 $(function() {
-    var playerId, gameActive = true, pollFinished = false;
-    var tajmer = false;
+    var playerId, gameActive = true,
+        pollFinished = false,
+        tajmer = false;
 
-    var timerFunc = function (br) {
-        console.log(br);
+    var timerFunc = function(br) {
         $("#tajmer").text(br);
-        if(br > 0) {
-            setTimeout(function () {
-                timerFunc(br-1);
+        if (br > 0) {
+            setTimeout(function() {
+                timerFunc(br - 1);
             }, 1000);
         }
     }
@@ -34,12 +34,12 @@ $(function() {
                         pollFinished = false;
 
 
-                        if(tajmer===false){
-                           $(".tajmer").show();
-                           timerFunc(8);
+                        if (tajmer === false) {
+                            $(".tajmer").show();
+                            timerFunc(8);
                         }
-                        tajmer=true;
-                        
+                        tajmer = true;
+
                         $("#submitButton").prop("disabled", false);
                         $("#pollButton").prop("disabled", false);
                         $("#userInput").prop("disabled", false);
@@ -50,7 +50,7 @@ $(function() {
                         setTimeout(function() {
                             checkStatus();
                         }, 700);
-                    } else if(response.onTurn.string === "false") {
+                    } else if (response.onTurn.string === "false") {
                         pollFinished = false;
                         $(".tajmer").hide();
                         $("#submitButton").prop("disabled", true);
@@ -62,9 +62,9 @@ $(function() {
                         setTimeout(function() {
                             checkStatus();
                         }, 700);
-                    } else if(response.onTurn.string === "endGamePoll") {
+                    } else if (response.onTurn.string === "endGamePoll") {
                         $(".tajmer").hide();
-                        if(!($('#myModal').hasClass('in')) && !pollFinished) {
+                        if (!($('#myModal').hasClass('in')) && !pollFinished) {
                             $('#myModal').modal("show");
                         }
                         tajmer = false;
@@ -75,14 +75,14 @@ $(function() {
 
                 } else if (response.status.string === "gameFinished") {
                     $('#pollButton').hide();
-                    $("#tajmer").hide();
-                    console.log("Game finished");
+                    $(".tajmer").show();
+                    $("#tajmer").text("The game has ended");
                 }
             }
         });
     }
 
-    $('#submitButton').on('click', function (e) {
+    $('#submitButton').on('click', function(e) {
         var word = $("#userInput").val();
         $.ajax({
             type: "POST",
@@ -97,7 +97,7 @@ $(function() {
         });
     });
 
-    $("#pollButton").on('click', function () {
+    $("#pollButton").on('click', function() {
         $.ajax({
             type: "POST",
             url: "./play/turn/" + playerId + "/endOfGamePoll",
@@ -107,9 +107,9 @@ $(function() {
             }
         });
     });
-    
-    $("#pollYes").on('click', function () {
-       $.ajax({
+
+    $("#pollYes").on('click', function() {
+        $.ajax({
             type: "POST",
             url: "./play/poll/" + playerId + "/endGame",
             data: {},
@@ -117,25 +117,26 @@ $(function() {
                 pollFinished = true;
                 $('#myModal').modal("hide");
             }
-       }); 
+        });
     });
-    
-    $("#pollNO").on('click', function () {
-       $.ajax({
+
+    $("#pollNo").on('click', function() {
+        $('#myModal').modal("hide");
+        $.ajax({
             type: "POST",
             url: "./play/poll/" + playerId + "/dontEndGame",
             data: {},
             success: function(data) {
                 pollFinished = true;
-                $('#myModal').modal("hide");
             }
-       }); 
+        });
     });
-    
+
     // Game logistics
     var startGame = function() {
         checkStatus();
         $("#submitButton").prop("disabled", true);
+        $("#pollButton").prop("disabled", true);
     };
 
     $.ajax({
