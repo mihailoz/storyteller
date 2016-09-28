@@ -2,10 +2,14 @@ package rs.manhut;
 
 import io.dropwizard.Application;
 import io.dropwizard.assets.AssetsBundle;
+import io.dropwizard.jdbi.DBIFactory;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
+import org.skife.jdbi.v2.DBI;
 import rs.manhut.core.GameInstance;
+import rs.manhut.db.GameDAO;
 import rs.manhut.resources.GameResource;
+import rs.manhut.resources.HistoryResource;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,10 +35,17 @@ public class StorytellerApplication extends Application<StorytellerConfiguration
     @Override
     public void run(final StorytellerConfiguration configuration,
                     final Environment environment) {
-        final GameResource resource = new GameResource(this.getGameInstanceList());
+        final GameResource gameResource = new GameResource(this.getGameInstanceList());
 
-        environment.jersey().register(resource);
-        environment.jersey().setUrlPattern("/play/*");
+        environment.jersey().register(gameResource);
+
+        final DBIFactory factory = new DBIFactory();
+        final DBI jdbi = factory.build(environment, configuration.getDataSourceFactory(), "postgresql");
+        final GameDAO dao = jdbi.onDemand(GameDAO.class);
+        final HistoryResource historyResource = new HistoryResource(dao);
+        environment.jersey().register(historyResource);
+
+        environment.jersey().setUrlPattern("/*");
     }
 
     public List<GameInstance> getGameInstanceList() {

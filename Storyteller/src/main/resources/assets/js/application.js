@@ -139,6 +139,11 @@ $(function() {
         $("#pollButton").prop("disabled", true);
     };
 
+    $("#FbShare").on('click', function () {
+        var fbpopup = window.open("https://www.facebook.com/sharer/sharer.php?u=file:///home/mihailo/ManHut/projects/storyteller/Storyteller/src/main/resources/assets/inGame.html", "pop", "width=600, height=400, scrollbars=no");
+        return false;
+    });
+
     $.ajax({
         url: "./play",
         dataType: "text",

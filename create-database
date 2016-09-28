@@ -1,0 +1,9 @@
+createdb -h localhost -p 5432 -U postgres storywriters
+
+sudo -u postgres psql
+
+CREATE USER storywriters WITH PASSWORD 'nasa_mala_baza';
+
+GRANT ALL PRIVILEGES ON DATABASE storywriters TO storywriters;
+
+\c storywriters

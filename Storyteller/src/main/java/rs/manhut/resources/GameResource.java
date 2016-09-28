@@ -15,7 +15,7 @@ import java.util.*;
  * Created by mihailo on 2.9.16..
  */
 
-@Path("/")
+@Path("/play")
 @Produces(MediaType.APPLICATION_JSON)
 public class GameResource {
 
