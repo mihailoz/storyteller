@@ -39,13 +39,13 @@ public class StorytellerApplication extends Application<StorytellerConfiguration
 
         environment.jersey().register(gameResource);
 
-        final DBIFactory factory = new DBIFactory();
-        final DBI jdbi = factory.build(environment, configuration.getDataSourceFactory(), "postgresql");
-        final GameDAO dao = jdbi.onDemand(GameDAO.class);
-        final HistoryResource historyResource = new HistoryResource(dao);
-        environment.jersey().register(historyResource);
+//        final DBIFactory factory = new DBIFactory();
+//        final DBI jdbi = factory.build(environment, configuration.getDataSourceFactory(), "postgresql");
+//        final GameDAO dao = jdbi.onDemand(GameDAO.class);
+//        final HistoryResource historyResource = new HistoryResource(dao);
+//        environment.jersey().register(historyResource);
 
-        environment.jersey().setUrlPattern("/*");
+        environment.jersey().setUrlPattern("/play/*");
     }
 
     public List<GameInstance> getGameInstanceList() {

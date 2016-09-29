@@ -3,10 +3,12 @@ package rs.manhut.resources;
 import com.codahale.metrics.annotation.Timed;
 import rs.manhut.cli.Player;
 import rs.manhut.core.GameInstance;
+import rs.manhut.core.TRIE;
 
 import javax.json.Json;
 import javax.json.JsonObject;
 import javax.ws.rs.*;
+import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.*;
@@ -15,13 +17,14 @@ import java.util.*;
  * Created by mihailo on 2.9.16..
  */
 
-@Path("/play")
+@Path("/")
 @Produces(MediaType.APPLICATION_JSON)
 public class GameResource {
 
     private UUID uid = UUID.fromString("38400000-8cf0-11bd-b23e-10b96e4ef00d");
     private List<GameInstance> gameInstanceList;
     private List<Player> playersQueueing = new ArrayList<Player>();
+    private TRIE wordChecker = new TRIE();
 
     public GameResource(List<GameInstance> games) {
         this.setGameInstanceList(games);
@@ -40,7 +43,7 @@ public class GameResource {
         Player p = new Player(playerId, null, defaultName);
         playersQueueing.add(p);
 
-        if(playersQueueing.size() > 1) {
+        if(playersQueueing.size() > 2) {
             GameInstance gi = new GameInstance(uid.randomUUID().toString());
 
             //TODO for first n players
@@ -83,6 +86,8 @@ public class GameResource {
             if(game != null && game.getPlayerIndex() > -1) {
                 onTurn = game.getPlayerOnTurn().getId().equals(playerId);
                 if(!game.getPollActive()) {
+
+
                     responseJson = Json.createObjectBuilder()
                             .add("status", "inGame")
                             .add("onTurn", onTurn.toString())
@@ -128,6 +133,7 @@ public class GameResource {
             GameInstance game = this.getGameByPlayer(playerId);
             String currentStory = "";
 
+            word = word.toLowerCase();
 
             if(game != null) {
                 if(game.getPollActive()) {
@@ -144,21 +150,25 @@ public class GameResource {
 
                         new Thread(turn).start();
                     } else {
-                        if (game.getWordCount() != 0) {
-                            currentStory = game.getStoryString() + " " + word;
+                        if(!wordChecker.checkWord(word)) {
+                            return Response.ok("Invalid word", MediaType.TEXT_PLAIN).build();
                         } else {
-                            currentStory = word;
-                        }
-                        game.setWordCount(game.getWordCount() + 1);
-                        game.setStoryString(currentStory);
-
-                        Runnable turn = new Runnable () {
-                            public void run() {
-                                game.nextPlayer();
+                            if (game.getWordCount() != 0) {
+                                currentStory = game.getStoryString() + " " + word;
+                            } else {
+                                currentStory = word;
                             }
-                        };
+                            game.setWordCount(game.getWordCount() + 1);
+                            game.setStoryString(currentStory);
 
-                        new Thread(turn).start();
+                            Runnable turn = new Runnable() {
+                                public void run() {
+                                    game.nextPlayer();
+                                }
+                            };
+
+                            new Thread(turn).start();
+                        }
                     }
                 }
             }
@@ -194,6 +204,22 @@ public class GameResource {
         }
         return Response.ok("Left queue", MediaType.TEXT_PLAIN).build();
     }
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/words")
+    public Response getSuggestedWords(@QueryParam("q") String keyword) {
+        try {
+            keyword = keyword.toLowerCase();
+            List suggested = wordChecker.suggestWord(keyword);
+            GenericEntity<List<String>> entity =
+                    new GenericEntity<List<String>>(suggested) {};
+            return Response.ok(entity).build();
+        } catch (Exception e) {
+            return Response.ok("").build();
+        }
+    }
+
 
     public GameInstance getGameByPlayer(String playerId) {
         for(GameInstance gi: this.getGameInstanceList()) {

@@ -12,10 +12,6 @@ $(function() {
         }
     }
 
-    $('#startGame').click(function(){
-      $("#rules").fadeOut(2200);
-    });
-
     var checkStatus = function() {
         $.ajax({
             url: "./play/status/" + playerId,
@@ -141,12 +137,35 @@ $(function() {
         checkStatus();
         $("#submitButton").prop("disabled", true);
         $("#pollButton").prop("disabled", true);
-    };
 
-    $("#FbShare").on('click', function () {
-        var fbpopup = window.open("https://www.facebook.com/sharer/sharer.php?u=file:///home/mihailo/ManHut/projects/storyteller/Storyteller/src/main/resources/assets/inGame.html", "pop", "width=600, height=400, scrollbars=no");
-        return false;
-    });
+        $("#userInput").select2({
+            placeholder: "Type word",
+            minimumInputLength: 1,
+            ajax: { // instead of writing the function to execute the request we use Select2's convenient helper
+                url: "./play/words",
+                dataType: 'json',
+                quietMillis: 250,
+                data: function(term, page) {
+                    return {
+                        q: term, // search term
+                    };
+                },
+                results: function(data, page) { // parse the results into the format expected by Select2.
+                    // since we are using custom formatting functions we do not need to alter the remote JSON data
+                    var words = [];
+                    console.log(data);
+                    for(var i = 0; i < data.length; i++) {
+                        words.push({
+                            id: data[i],
+                            text: data[i]
+                        });
+                    }
+                    console.log(words);
+                    return { results: words };
+                }
+            }
+        });
+    };
 
     $.ajax({
         url: "./play",
