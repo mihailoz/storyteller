@@ -1,37 +1,38 @@
 <head>
 
-  <title>StoryTellers</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script type="text/javascript" src="./js/jquery-3.1.0.js"></script>
-  <script type="text/javascript" src="./js/index-controller.js"></script>
-  <script type="text/javascript" src="./js/application.js"></script>
-  <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
-  <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.css">
-  <link rel="stylesheet" type="text/css" href="css/style.css">
+    <title>StoryWriters</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="text/javascript" src="./js/jquery-3.1.0.js"></script>
+    <script type="text/javascript" src="./js/index-controller.js"></script>
+    <script type="text/javascript" src="./js/application.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
 
-   <link rel="icon"  href="icon.png" />
+    <link rel="icon" href="icon.png" />
 </head>
+
 <body>
 
-<div id="imgs" class="imgs">
+    <div id="imgs" class="imgs">
 
-    <img src="loadingscreen.jpg"  class="fit center"alt="slika" />
-    <div class="content">
-        <div class="button-container">
-            <button  type="button"  id="startGame" name="button">start game</button>
+        <img src="loadingscreen.jpg" class="fit center" alt="slika" />
+        <div class="content">
+            <div class="button-container">
+                <button type="button" id="startGame" name="button">start game</button>
+            </div>
+        </div>
+        <div id="rules" class="">
+            <p style="text-align: center;">Game Rules</p>
+            <p name="pravila" disabled>
+                <br>- storywritter is a typing-based game made for 5 players.
+                <br>- players take alternating turns, typing only one word at a time.
+                <br>- each player has 8 seconds to type the word.
+                <br>- if the player decides to end the sentence, he should put a punctuation mark, but doing so he can't write anything else.
+                <br>- the goal of the game is to write a story and have fun.
+                <br>- the game ends when the majority of players decide the story should be finished(by clicking the end-game vote button). </p>
         </div>
     </div>
-    <div class="">
-      <textarea name="pravila" id="rules" disabled >                            Game Rules
-
-  - storywritter is a typing-based game made for 5 players.
-  - players take alternating turns, typing only one word at a time.
-  - each player has 8 seconds to type the word.
-  - if the player decides to end the sentence, he should put a punctuation mark, but doing so he can't write anything else.
-  - the goal of the game is to write a story and have fun.
-  - the game ends when the majority of players decide the story should be finished(by clicking the end-game vote button). </textarea>
-    </div>
-</div>
 
 </body>
