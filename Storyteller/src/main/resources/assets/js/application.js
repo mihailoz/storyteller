@@ -1,5 +1,5 @@
 $(function() {
-    var playerId, gameActive = true,
+    var playerId, gameId, gameActive = true,
         pollFinished = false,
         tajmer = false;
 
@@ -28,6 +28,10 @@ $(function() {
                     }, 700);
                 } else if (response.status.string === "inGame") {
                     // If in game
+
+                    if(gameId === undefined) {
+                        gameId = response.gameId.string;
+                    }
 
                     if (response.onTurn.string === "true") {
                         // If on turn
@@ -63,6 +67,7 @@ $(function() {
                             checkStatus();
                         }, 700);
                     } else if (response.onTurn.string === "endGamePoll") {
+                        console.log("POLL IS ON");
                         $(".tajmer").hide();
                         if (!($('#myModal').hasClass('in')) && !pollFinished) {
                             $('#myModal').modal("show");
@@ -77,6 +82,8 @@ $(function() {
                     $('#pollButton').hide();
                     $(".tajmer").show();
                     $("#tajmer").text("The game has ended");
+
+                    window.location.replace("./shareGame.html?" + gameId);
                 }
             }
         });

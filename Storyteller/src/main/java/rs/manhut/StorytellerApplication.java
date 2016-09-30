@@ -7,7 +7,6 @@ import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import org.skife.jdbi.v2.DBI;
 import rs.manhut.core.GameInstance;
-import rs.manhut.db.GameDAO;
 import rs.manhut.resources.GameResource;
 import rs.manhut.resources.HistoryResource;
 
@@ -36,14 +35,10 @@ public class StorytellerApplication extends Application<StorytellerConfiguration
     public void run(final StorytellerConfiguration configuration,
                     final Environment environment) {
         final GameResource gameResource = new GameResource(this.getGameInstanceList());
+        final HistoryResource historyResource = new HistoryResource();
 
         environment.jersey().register(gameResource);
-
-//        final DBIFactory factory = new DBIFactory();
-//        final DBI jdbi = factory.build(environment, configuration.getDataSourceFactory(), "postgresql");
-//        final GameDAO dao = jdbi.onDemand(GameDAO.class);
-//        final HistoryResource historyResource = new HistoryResource(dao);
-//        environment.jersey().register(historyResource);
+        environment.jersey().register(historyResource);
 
         environment.jersey().setUrlPattern("/play/*");
     }

@@ -1,37 +1,37 @@
 package rs.manhut.resources;
 
-import rs.manhut.cli.Game;
-import rs.manhut.db.GameDAO;
+import com.codahale.metrics.annotation.Timed;
+import rs.manhut.core.GameHistoryController;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.util.List;
 
 /**
  * Created by mihailo on 28.9.16..
  */
 @Path("/history")
+@Produces(MediaType.APPLICATION_JSON)
 public class HistoryResource {
 
-    private GameDAO dao;
+    private GameHistoryController gsc = new GameHistoryController();
 
-    public HistoryResource (GameDAO dao) {
-        this.setDao(dao);
+    @GET
+    @Timed
+    @Path("/{gameId}")
+    public Response getGameStory(@PathParam("gameId") String gameId) {
+        String story = this.getGsc().readGameHistory(gameId);
+        return Response.ok(story, MediaType.TEXT_PLAIN).build();
     }
 
-//    @GET
-//    @Path("/{game-id}")
-//    public Response findStory(@PathParam("game-id") String gameId){
-//        return List<Game> story = dao.findGame(gameId);
-//    }
-
-    public GameDAO getDao() {
-        return dao;
+    public GameHistoryController getGsc() {
+        return gsc;
     }
 
-    public void setDao(GameDAO dao) {
-        this.dao = dao;
+    public void setGsc(GameHistoryController gsc) {
+        this.gsc = gsc;
     }
 }

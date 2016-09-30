@@ -2,6 +2,7 @@ package rs.manhut.resources;
 
 import com.codahale.metrics.annotation.Timed;
 import rs.manhut.cli.Player;
+import rs.manhut.core.GameHistoryController;
 import rs.manhut.core.GameInstance;
 import rs.manhut.core.TRIE;
 
@@ -25,6 +26,7 @@ public class GameResource {
     private List<GameInstance> gameInstanceList;
     private List<Player> playersQueueing = new ArrayList<Player>();
     private TRIE wordChecker = new TRIE();
+    private GameHistoryController gsc = new GameHistoryController();
 
     public GameResource(List<GameInstance> games) {
         this.setGameInstanceList(games);
@@ -86,23 +88,28 @@ public class GameResource {
             if(game != null && game.getPlayerIndex() > -1) {
                 onTurn = game.getPlayerOnTurn().getId().equals(playerId);
                 if(!game.getPollActive()) {
-
-
                     responseJson = Json.createObjectBuilder()
                             .add("status", "inGame")
                             .add("onTurn", onTurn.toString())
+                            .add("gameId", game.getGameId())
                             .add("story", game.getStoryString()).build();
                     return Response.ok(responseJson, MediaType.APPLICATION_JSON).build();
                 } else {
                     responseJson = Json.createObjectBuilder()
                             .add("status", "inGame")
                             .add("onTurn", "endGamePoll")
+                            .add("gameId", game.getGameId())
                             .add("story", game.getStoryString()).build();
                     return Response.ok(responseJson, MediaType.APPLICATION_JSON).build();
                 }
             } else {
                 if(game != null) {
-                    this.getGameInstanceList().remove(game);
+                    this.getGsc().writeGameHistory(game.getGameId(), game.getStoryString());
+                    try {
+                        this.getGameInstanceList().remove(game);
+                    } catch (Exception e){
+                        /* ignore */
+                    }
                 }
 
                 responseJson = Json.createObjectBuilder()
@@ -141,7 +148,7 @@ public class GameResource {
                 }
 
                 if(game.getPlayerOnTurn().getId().equals(playerId)) {
-                    if(word.equals("endOfGamePoll")) {
+                    if(word.equals("endofgamepoll")) {
                         Runnable turn = new Runnable () {
                             public void run() {
                                 game.nextPlayer(true);
@@ -230,6 +237,14 @@ public class GameResource {
             }
         }
         return null;
+    }
+
+    public GameHistoryController getGsc() {
+        return gsc;
+    }
+
+    public void setGsc(GameHistoryController gsc) {
+        this.gsc = gsc;
     }
 
     public List<GameInstance> getGameInstanceList() {
