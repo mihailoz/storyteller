@@ -115,7 +115,7 @@ $(function() {
     });
 
     $("#pollYes").on('click', function() {
-        $.ajax({
+        $.ajax({    
             type: "POST",
             url: "./play/poll/" + playerId + "/endGame",
             data: {},
