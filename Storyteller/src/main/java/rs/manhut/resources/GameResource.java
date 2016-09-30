@@ -223,7 +223,7 @@ public class GameResource {
                     new GenericEntity<List<String>>(suggested) {};
             return Response.ok(entity).build();
         } catch (Exception e) {
-            return Response.ok("").build();
+            return Response.ok("[]").build();
         }
     }
 

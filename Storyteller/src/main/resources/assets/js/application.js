@@ -47,7 +47,6 @@ $(function() {
                         $("#submitButton").prop("disabled", false);
                         $("#pollButton").prop("disabled", false);
                         $("#userInput").prop("disabled", false);
-                        $("#userInput").focus();
 
                         $("#storyParagraph").text(response.story.string);
 
@@ -146,7 +145,7 @@ $(function() {
         $("#pollButton").prop("disabled", true);
 
         $("#userInput").select2({
-            placeholder: "Type word",
+            placeholder: "Click to type",
             minimumInputLength: 1,
             ajax: { // instead of writing the function to execute the request we use Select2's convenient helper
                 url: "./play/words",
