@@ -1,9 +1,9 @@
 body {
     background: url('../playscreen.jpg') no-repeat center center fixed;
     -webkit-background-size: cover;
-      -moz-background-size: cover;
-      -o-background-size: cover;
-      background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
 
 #startGame {
@@ -30,84 +30,40 @@ body {
     bottom: 1%;
     right: 1%;
 }
+
 .inp {
-    position: relative;
+    position: absolute;
+    left: 6%;
     top: 8%;
-    width: 270px;
-    height: auto;
+    padding: 5px 20px;
+    width: 14%;
     color: black;
     background-color: #AC8F63;
     border: 4px solid #000000;
     border-radius: 7px;
     font-size: 20px;
 }
-.inp:focus{
-  outline: none !important;
-  border: 4px solid #000000;
-  border-color: black;
-}
 
-/* Select2 override */
-.select2-container,
-.select2-choice,
-.select2-container .select2-choice,
-.select2-drop,
-.select2-search input,
-.select2-results .select2-no-results,
-.select2-results .select2-searching,
-.select2-results .select2-ajax-error {
-    background-color: #AC8F63;
-}
-
-.select2-default {
-    color: #000000 !important;
-}
-
-.select2-drop {
+.inp:focus {
+    outline: none !important;
     border: 4px solid #000000;
-    border-radius: 7px;
-}
-
-.select2-container .select2-choice > .select2-chosen {
-    background-color: #AC8F63;
-    color: #000000 !important;
-    padding: 5px 20px;
-    margin: 0px;
-}
-
-.select2-container .select2-choice {
-    height: 34px;
-    padding: 0px;
-    border: 0px;
-    border-radius: 0px;
-}
-
-.select2-container .select2-choice .select2-arrow {
-    display: none;
-}
-
-.leftside {
-    width: 270px;
-    height: 100%;
-    position: absolute;
-    left: 6%;
+    border-color: black;
 }
 
 #submitButton {
     /*width: 7.8%;*/
-    position: relative;
-    padding: 5px 20px ;
-    background-color: #AC8F63  ;
+    position: absolute;
+    padding: 5px 50px;
+    background-color: #AC8F63;
     outline: none;
     color: #000000;
     border: 4px solid #000000;
     border-radius: 7px;
     font-family: font;
     font-size: 20px;
+    margin: auto;
+    left: 9%;
     top: 16%;
-    width: 140px;
-    margin-right: 65px;
-    margin-left: 65px;
 }
 
 #submitButton:disabled, #submitButton:disabled:hover {
@@ -119,20 +75,21 @@ body {
 }
 
 #pollButton {
-    padding: 5px 50px ;
-    background-color: #AC8F63  ;
+    padding: 5px 50px;
+    background-color: #AC8F63;
     outline: none;
     color: #000000;
     border: 4px solid #000000;
     border-radius: 7px;
     font-family: font;
-    font-size: 20px;
+    font-size: 25px;
     margin: auto;
-    position: relative;
-    top: 70%;
-    width: 270px;
+    position: absolute;
+    left: 6%;
+    top: 61%;
 }
-.tajmer{
+
+.tajmer {
     display: block;
     position: absolute;
     padding: 5px 40px;
@@ -141,6 +98,7 @@ body {
     width: 20%;
     font-size: 40px;
 }
+
 #pollButton:hover {
     background-color: #BEB3A0;
 }
@@ -160,8 +118,6 @@ body {
     margin: 0 auto;
     width: 200px;
 }
-
-
 
 img {
     position: relative;
@@ -198,35 +154,34 @@ img {
     border: none;
 }
 
-
-#rules{
-  position: absolute;
-  left: 2%;
-  top: 4%;
-  padding: 10px 10px;
-  width: 21%;
-  height: 57%;
-  border: 20px solid #000000;
-  border-radius: 20px;
-  background-color: rgba(255, 255, 255, 0.55);
-  color: black;
-  border: none;
-  font-family: font;
-  font-size: 20px;
-  border: none;
-  resize: none;
-
+#rules {
+    position: absolute;
+    left: 2%;
+    top: 4%;
+    padding: 10px 10px;
+    width: 21%;
+    height: 57%;
+    border: 20px solid #000000;
+    border-radius: 20px;
+    background-color: rgba(255, 255, 255, 0.55);
+    color: black;
+    border: none;
+    font-family: font;
+    font-size: 20px;
+    border: none;
+    resize: none;
 }
 
-.fit{
-  height: 100%;
-  width: 100%;
+.fit {
+    height: 100%;
+    width: 100%;
 }
 
 .center {
-  display: block;
-  margin: auto;
+    display: block;
+    margin: auto;
 }
+
 @font-face {
     font-family: font;
     src: url('font2.ttf');
@@ -246,8 +201,6 @@ img {
     -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
 }
 
-
-
 .mojmodal {
     background-image: url('../imgs/modalimg.jpg');
     background-position: center;
@@ -256,7 +209,6 @@ img {
     height: 200px;
 }
 
-.mojmodalsve {}
 
 .myButton {
     background-color: #c7b487;
@@ -286,4 +238,55 @@ img {
     margin-top: 20px;
     font-family: font;
     font-size: 24px;
+}
+
+
+#hmpgbtn {
+  background-color:#D3D3D3;
+  border-radius: 50%;
+  border: 2px black;
+  height: 75px;
+  width: 75px;
+  position: absolute;;
+  top: 50%;
+  left: 15%;
+  z-index: 999;
+}
+
+#hmpgbtn:hover{
+  background-color: #B7B7B7;
+}
+ul.share-buttons{
+  list-style: none;
+  padding: 0;
+}
+
+ul.share-buttons li{
+  display: inline;
+}
+
+ul.share-buttons .sr-only {
+  position: absolute;
+  clip: rect(1px 1px 1px 1px);
+  clip: rect(1px, 1px, 1px, 1px);
+  padding: 0;
+  border: 0;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+}
+
+ul.share-buttons img{
+  width: 32px;
+}
+
+.share-buttons{
+  position: absolute;
+  right: 5%;
+  bottom: 5%;
+}
+.manhut2 {
+    position: absolute;
+    bottom: 3%;
+    right: 5%;
 }
