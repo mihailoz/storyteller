@@ -1,0 +1,14 @@
+---------------Ovo je general bug thread---------------
+Bugovi se reportuju na sledeci nacin:
+1)Stranica na kojoj se bug nalazi
+2)Akcija koja pokrece bug(ako takva postoji)
+3)Detaljan opis buga
+4)Potencijalni uzrok buga
+5)Potencijalno resenje buga
+//Slobodno dajte bugu neko ime, da bi se lakse razumeli pri resavanju istog
+-------------------------------------------------------
+
+----------------------Lista bugova---------------------
+
+--No Submit bug--
+Na stranici /inGame.html nakon sto submitujemo nesto, tekst ostane u polju, i nakon sto ponovo dodje nas turn, submit dugme ne ispisuje rec koja je ostala, vec se ponovo mora kucati rec. Ovo bi moglo da se "resi" time sto bi se rec izbrisala iz polja nakon submitovanja.
