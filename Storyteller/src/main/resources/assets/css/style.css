@@ -1,4 +1,4 @@
-body {
+body.withBackground {
     background: url('../imgs/playscreen.jpg') no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -203,7 +203,6 @@ img {
     top: 4%;
     padding: 10px 10px;
     width: 21%;
-    height: 57%;
     border: 20px solid #000000;
     border-radius: 20px;
     background-color: rgba(255, 255, 255, 0.55);

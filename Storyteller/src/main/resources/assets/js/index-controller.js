@@ -26,7 +26,7 @@ $(function () {
         $("#startGame").fadeOut(2200);
         $("#rules").fadeOut(2200);
         setTimeout(function () {
-            window.location.href = "api/game/listGames"
+            window.location.href = "listGames.html"
         }, 4000);
     });
 });
