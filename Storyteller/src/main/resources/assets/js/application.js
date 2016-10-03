@@ -14,7 +14,7 @@ $(function() {
 
     var checkStatus = function() {
         $.ajax({
-            url: "./play/status/" + playerId,
+            url: "./api/play/status/" + playerId,
             dataType: "text",
             success: function(data) {
                 var response = JSON.parse(data);
@@ -92,7 +92,7 @@ $(function() {
         var word = $("#userInput").val();
         $.ajax({
             type: "POST",
-            url: "./play/turn/" + playerId + "/" + word,
+            url: "./api/play/turn/" + playerId + "/" + word,
             data: {},
             success: function(data) {
                 $(".tajmer").hide();
@@ -106,7 +106,7 @@ $(function() {
     $("#pollButton").on('click', function() {
         $.ajax({
             type: "POST",
-            url: "./play/turn/" + playerId + "/endOfGamePoll",
+            url: "./api/play/turn/" + playerId + "/endOfGamePoll",
             data: {},
             success: function(data) {
                 $('#myModal').modal("show");
@@ -115,9 +115,9 @@ $(function() {
     });
 
     $("#pollYes").on('click', function() {
-        $.ajax({    
+        $.ajax({
             type: "POST",
-            url: "./play/poll/" + playerId + "/endGame",
+            url: "./api/play/poll/" + playerId + "/endGame",
             data: {},
             success: function(data) {
                 pollFinished = true;
@@ -130,7 +130,7 @@ $(function() {
         $('#myModal').modal("hide");
         $.ajax({
             type: "POST",
-            url: "./play/poll/" + playerId + "/dontEndGame",
+            url: "./api/play/poll/" + playerId + "/dontEndGame",
             data: {},
             success: function(data) {
                 pollFinished = true;
@@ -148,7 +148,7 @@ $(function() {
             placeholder: "Click to type",
             minimumInputLength: 1,
             ajax: { // instead of writing the function to execute the request we use Select2's convenient helper
-                url: "./play/words",
+                url: "./api/play/words",
                 dataType: 'json',
                 quietMillis: 250,
                 data: function(term, page) {
@@ -159,14 +159,12 @@ $(function() {
                 results: function(data, page) { // parse the results into the format expected by Select2.
                     // since we are using custom formatting functions we do not need to alter the remote JSON data
                     var words = [];
-                    console.log(data);
                     for(var i = 0; i < data.length; i++) {
                         words.push({
                             id: data[i],
                             text: data[i]
                         });
                     }
-                    console.log(words);
                     return { results: words };
                 }
             }
@@ -174,7 +172,7 @@ $(function() {
     };
 
     $.ajax({
-        url: "./play",
+        url: "./api/play",
         dataType: "text",
         success: function(data) {
             playerId = data;
@@ -185,7 +183,7 @@ $(function() {
     window.onbeforeunload = function() {
         $.ajax({
             type: "POST",
-            url: "./play/leave/" + playerId,
+            url: "./api/play/leave/" + playerId,
             data: {}
         });
     };

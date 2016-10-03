@@ -2,16 +2,16 @@ package rs.manhut;
 
 import io.dropwizard.Application;
 import io.dropwizard.assets.AssetsBundle;
-import io.dropwizard.jdbi.DBIFactory;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
-import org.skife.jdbi.v2.DBI;
 import rs.manhut.core.GameInstance;
 import rs.manhut.resources.GameResource;
+import rs.manhut.resources.PlayResource;
 import rs.manhut.resources.HistoryResource;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class StorytellerApplication extends Application<StorytellerConfiguration> {
 
@@ -34,13 +34,18 @@ public class StorytellerApplication extends Application<StorytellerConfiguration
     @Override
     public void run(final StorytellerConfiguration configuration,
                     final Environment environment) {
-        final GameResource gameResource = new GameResource(this.getGameInstanceList());
+
+        UUID storytellerUid = UUID.fromString("38400000-8cf0-11bd-b23e-10b96e4ef00d");
+
+        final PlayResource playResource = new PlayResource(this.getGameInstanceList(), storytellerUid);
+        final GameResource gameResource = new GameResource(this.getGameInstanceList(), storytellerUid);
         final HistoryResource historyResource = new HistoryResource();
 
-        environment.jersey().register(gameResource);
+        environment.jersey().register(playResource);
         environment.jersey().register(historyResource);
+        environment.jersey().register(gameResource);
 
-        environment.jersey().setUrlPattern("/play/*");
+        environment.jersey().setUrlPattern("/api/*");
     }
 
     public List<GameInstance> getGameInstanceList() {

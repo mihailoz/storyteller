@@ -12,6 +12,8 @@ import java.util.concurrent.*;
  */
 public class GameInstance extends Thread {
     private String gameId;
+    private String gameName;
+    private String gamePassword;
     private String storyString = "";
     private List<Player> playerList = new ArrayList<Player>();
     private Player playerOnTurn;
@@ -27,6 +29,13 @@ public class GameInstance extends Thread {
 
     public GameInstance (String id) {
         this.setGameId(id);
+        this.setGameName("Random game");
+    }
+
+    public GameInstance (String id, String gameName, String gamePassword) {
+        this.setGameId(id);
+        this.setGameName(gameName);
+        this.setGamePassword(gamePassword);
     }
 
     public void run () {
@@ -215,6 +224,22 @@ public class GameInstance extends Thread {
 
     public void setPollActive(Boolean pollActive) {
         this.pollActive = pollActive;
+    }
+
+    public String getGamePassword() {
+        return gamePassword;
+    }
+
+    public void setGamePassword(String gamePassword) {
+        this.gamePassword = gamePassword;
+    }
+
+    public String getGameName() {
+        return gameName;
+    }
+
+    public void setGameName(String gameName) {
+        this.gameName = gameName;
     }
 }
 

@@ -1,16 +1,12 @@
 MIHAILO:
     - Podesiti server - kad dodje vreme za to
     - Pripremiti server za produkciju
-    - Server-side kod za dropdown sa recima
+    - Napraviti premade-gameove
 ALEKSA:
-    - Ubaciti TRIE, istestirati jos jednom (Miki ce pomoci :D)
     - Smisliti kako da poubacujemo sve dank memes reci
 MARKO:
-    - Razmisliti sta treba da se desi kad se zavrsi igra
     - Videti kako ubaciti share button-e za facebook/twitter (aleksa neka uleti kad ubacimo TRIE)
 LUKA:
-    - Background inGame
-    - Ikonica igre
+    - Dorada izgleda gde treba
 OGNJEN:
-    - Rules board na pocetku
-    - Pomoci rutketu gde treba
+    - Dorada izgleda gde treba

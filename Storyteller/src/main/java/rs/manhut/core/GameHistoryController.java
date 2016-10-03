@@ -7,11 +7,10 @@ import java.io.*;
  */
 public class GameHistoryController {
 
-    final private String filePath = "/home/mihailo/Storyteller/game-history/";
+    final private String filePath = System.getProperty("user.home") + "/Storyteller/game-history/";
 
     public void writeGameHistory(String gameId, String gameStory) {
         try {
-            //Whatever the file path is.
             File f = new File(filePath + gameId + ".txt");
 
             if(!f.exists()) {
