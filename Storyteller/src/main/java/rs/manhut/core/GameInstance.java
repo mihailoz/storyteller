@@ -14,6 +14,8 @@ public class GameInstance extends Thread {
     private String gameId;
     private String gameName;
     private String gamePassword;
+    private String gameOwner;
+
     private String storyString = "";
     private List<Player> playerList = new ArrayList<Player>();
     private Player playerOnTurn;
@@ -240,6 +242,14 @@ public class GameInstance extends Thread {
 
     public void setGameName(String gameName) {
         this.gameName = gameName;
+    }
+
+    public String getGameOwner() {
+        return gameOwner;
+    }
+
+    public void setGameOwner(String gameOwner) {
+        this.gameOwner = gameOwner;
     }
 }
 

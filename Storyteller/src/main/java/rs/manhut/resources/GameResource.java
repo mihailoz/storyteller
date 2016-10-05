@@ -44,6 +44,8 @@ public class GameResource {
             Player p = new Player(playerId, null, playerName);
             GameInstance gi = new GameInstance(uid.randomUUID().toString(), gameName, gamePassword);
 
+            gi.setGameOwner(p.getId());
+
             queueingGamesList.add(gi);
 
             JsonObject responseJson = Json.createObjectBuilder()
@@ -52,6 +54,50 @@ public class GameResource {
             return Response.ok(responseJson, MediaType.APPLICATION_JSON).build();
         } catch (Exception e) {
             return Response.ok("Failed to create game!").build();
+        }
+    }
+
+    @GET
+    @Path("/status/{playerId}")
+    public Response getStatus(@PathParam("playerId") String playerId) {
+        try {
+            GameInstance gi = null;
+            for(GameInstance g: this.getGameInstanceList()) {
+                for(Player p: g.getPlayerList()) {
+                    if(p.getId().equals(playerId)) {
+                        gi = g;
+                    }
+                }
+            }
+            if(gi != null) {
+                return Response.ok("game-started").build();
+            } else {
+                for(GameInstance g: this.getQueueingGamesList()) {
+                    for(Player p: g.getPlayerList()) {
+                        if(p.getId().equals(playerId)) {
+                            gi = g;
+                        }
+                    }
+                }
+                if(gi != null) {
+                    Boolean pp = false;
+                    if(gi.getGamePassword() != null) {
+                        pp = true;
+                    }
+
+                    Game g = new Game();
+                    g.setGameId(gi.getGameId());
+                    g.setGameName(gi.getGameName());
+                    g.setPlayerNumber(gi.getPlayerList().size());
+                    g.setPasswordProtected(pp);
+
+                    return Response.ok(mapper.writeValueAsString(g)).build();
+                } else {
+                    throw new Exception("Game not found");
+                }
+            }
+        } catch (Exception e) {
+            return Response.ok("Can't retrieve game data").build();
         }
     }
 
@@ -109,9 +155,55 @@ public class GameResource {
         }
     }
 
-    public List<GameInstance> getGameInstanceList() {
-        return gameInstanceList;
+    @POST
+    @Path("/player/{playerId}/{gameId}")
+    public Response startGame(@PathParam("playerId") String playerId,
+                              @PathParam("gameId") String gameId) {
+        try {
+            GameInstance gi = null;
+            for(GameInstance g: this.getQueueingGamesList()) {
+                if(g.getGameId().equals(gameId) && g.getGameOwner().equals(playerId)) {
+                    gi = g;
+                }
+            }
+            if(gi != null) {
+                gi.run();
+                this.getQueueingGamesList().remove(gi);
+                this.getGameInstanceList().add(gi);
+                return Response.ok("Game started").build();
+            } else {
+                throw new Exception();
+            }
+        } catch (Exception e) {
+            return Response.ok("Game cannot be started").build();
+        }
     }
+
+    @GET
+    @Path("/joinGame")
+    public Response joinGame(@QueryParam("gameId") String gameId,
+                               @QueryParam("playerName") String playerName,
+                               @QueryParam("gamePassword") String gamePassword) {
+        try {
+            GameInstance gi = null;
+
+            for(GameInstance g: this.getQueueingGamesList()) {
+                if(gameId.equals(g.getGameId()) && gameId.equals(g.getGamePassword())) {
+                    gi = g;
+                }
+            }
+            if(gi != null) {
+                Player p = new Player(uid.randomUUID().toString(), gi, playerName);
+                gi.addPlayer(p);
+                return Response.ok("Game joined").build();
+            } else {
+                throw new Exception("Game not found");
+            }
+        } catch (Exception e) {
+            return Response.ok(e.getMessage()).build();
+        }
+    }
+
 
     public void setGameInstanceList(List<GameInstance> gameInstanceList) {
         this.gameInstanceList = gameInstanceList;
@@ -127,5 +219,9 @@ public class GameResource {
 
     public void setUid(UUID uid) {
         this.uid = uid;
+    }
+
+    public List<GameInstance> getGameInstanceList() {
+        return gameInstanceList;
     }
 }

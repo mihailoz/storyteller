@@ -18,9 +18,13 @@ $(function () {
                 for (var i = 0; i < gameData.length; i++) {
                     var g = gameData[i];
 
-                    var $tablerow = '<tr class="gameRow"><td>' + g.gameName + '</td><td>' + g.playerNumber + '</td><td>' + g.passwordProtected + '</td></tr>';
+                    var $tablerow = '<tr class="gameRow"><td>' + g.gameName + '</td><td>' + g.playerNumber + '</td><td>' + g.passwordProtected + '</td><td><button class="joinGameButton" id="' + gameData.gameId + '">Join</button></td></tr>';
                     $('#gameTable tr:last').after($tablerow);
                 }
+                
+                $(".joinGameButton").on('click', function () {
+                   // TODO 
+                });
             }
         });
 
