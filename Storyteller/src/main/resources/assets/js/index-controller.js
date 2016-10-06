@@ -6,6 +6,8 @@ $(function () {
         $(".imgs").addClass('scale');
         $("#startGame").fadeOut(2200);
         $("#rules").fadeOut(2200);
+        $("#createGame").fadeOut(2200);
+        $("#listGames").fadeOut(2200);
         setTimeout(function () {
             $.ajax({
                 url: "./api/play",
@@ -19,21 +21,12 @@ $(function () {
 
     });
 
-    $("#createGame").click(function () {
-        $(".imgs").addClass('scale');
-        $("#startGame").fadeOut(2200);
-        $("#rules").fadeOut(2200);
-        setTimeout(function () {
-            window.location.href = "createGame.html"
-        }, 4000);
+    $("#createGame").on("click",function () {
+      $('#kreiraj').modal("show");
     });
 
     $("#listGames").click(function () {
-        $(".imgs").addClass('scale');
-        $("#startGame").fadeOut(2200);
-        $("#rules").fadeOut(2200);
-        setTimeout(function () {
-            window.location.href = "listGames.html"
-        }, 4000);
+        $('#nadji').modal("show");
     });
+
 });

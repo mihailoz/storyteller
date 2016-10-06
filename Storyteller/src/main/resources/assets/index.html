@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script type="text/javascript" src="./js/jquery-3.1.0.js"></script>
     <script type="text/javascript" src="./js/index-controller.js"></script>
+    <script type="text/javascript" src="./js/bootstrap.js"></script>
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
@@ -20,8 +21,8 @@
         <div class="content">
             <div class="button-container">
                 <button type="button" id="startGame" name="button">start game</button>
-                <button type="button" id="createGame" name="button">create game</button>
-                <button type="button" id="listGames" name="button">join game</button>
+                <button type="button" class="izgledDugmeta1" id="createGame" name="button">create game</button>
+                <button type="button" class="izgledDugmeta2" id="listGames" name="button">join game</button>
             </div>
         </div>
         <div id="rules" class="">
@@ -34,6 +35,55 @@
                 <br>- the goal of the game is to write a story and have fun.
                 <br>- the game ends when the majority of players decide the story should be finished(by clicking the end-game vote button). </p>
         </div>
+
+    </div>
+
+    <div id="kreiraj" class="modal fade" role="dialog">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Create Game</h4>
+          </div>
+          <div class="modal-body">
+            <input id="gameName">
+            <input id="playerName">
+            <input type="checkbox" id="hasPassword">
+            <input id="passwordInput">
+            <button id="createGame">Create game</button>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div id="nadji" class="modal fade" role="dialog">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Join Game</h4>
+          </div>
+          <div class="modal-body">
+            <input id="searchInput">
+            <table id="gameTable">
+                <tr>
+                    <th>Game name</th>
+                    <th>Number of Players</th>
+                    <th>Has Password</th>
+                    <th>Join Game</th>
+                </tr>
+            </table>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+
+      </div>
     </div>
 
 </body>
