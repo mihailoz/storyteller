@@ -4,11 +4,11 @@ $(function () {
         $.ajax({
             url: "api/game/listGames",
             data: {
-                q: searchTerm  
+                q: searchTerm
             },
             success: function (data) {
                 var gameData = [];
-                
+
                 for (var i = 0; i < data.length; i++) {
                     gameData.push(JSON.parse(data[i]));
                 }
@@ -17,13 +17,21 @@ $(function () {
 
                 for (var i = 0; i < gameData.length; i++) {
                     var g = gameData[i];
-
-                    var $tablerow = '<tr class="gameRow"><td>' + g.gameName + '</td><td>' + g.playerNumber + '</td><td>' + g.passwordProtected + '</td><td><button class="joinGameButton" id="' + gameData.gameId + '">Join</button></td></tr>';
+                    var $tablerow = '<tr class="gameRow" id="' + g.gameId + '"><td>' + g.gameName + '</td><td>' + g.playerNumber + '</td><td>' + g.passwordProtected + '</td><td><button class="joinGameButton" id="' + g.gameId + '">Join</button></td></tr>';
                     $('#gameTable tr:last').after($tablerow);
                 }
-                
-                $(".joinGameButton").on('click', function () {
-                   // TODO 
+
+                $(".joinGameButton").on('click', function (e) {
+                   $.ajax({
+                       type: "GET",
+                       url: "./api/game/joinGame",
+                       data: {
+                           gameId: $(e.target).attr('id')
+                       },
+                       success: function (data) {
+                           window.location.href = "gameLobby.html?" + data;
+                       }
+                   });
                 });
             }
         });

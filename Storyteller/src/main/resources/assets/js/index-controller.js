@@ -7,7 +7,14 @@ $(function () {
         $("#startGame").fadeOut(2200);
         $("#rules").fadeOut(2200);
         setTimeout(function () {
-            window.location.href = "inGame.html"
+            $.ajax({
+                url: "./api/play",
+                dataType: "text",
+                success: function(data) {
+                    window.location.href = "inGame.html?" + data;
+                }
+            });
+
         }, 4000);
 
     });

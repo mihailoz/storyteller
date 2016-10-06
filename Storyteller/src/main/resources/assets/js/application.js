@@ -139,44 +139,37 @@ $(function() {
     });
 
     // Game logistics
-    var startGame = function() {
-        checkStatus();
-        $("#submitButton").prop("disabled", true);
-        $("#pollButton").prop("disabled", true);
 
-        $("#userInput").select2({
-            placeholder: "Click to type",
-            minimumInputLength: 1,
-            ajax: { // instead of writing the function to execute the request we use Select2's convenient helper
-                url: "./api/play/words",
-                dataType: 'json',
-                quietMillis: 250,
-                data: function(term, page) {
-                    return {
-                        q: term, // search term
-                    };
-                },
-                results: function(data, page) { // parse the results into the format expected by Select2.
-                    // since we are using custom formatting functions we do not need to alter the remote JSON data
-                    var words = [];
-                    for(var i = 0; i < data.length; i++) {
-                        words.push({
-                            id: data[i],
-                            text: data[i]
-                        });
-                    }
-                    return { results: words };
+    playerId = window.location.search;
+    playerId = playerId.substring(1, playerId.length);
+
+    checkStatus();
+    $("#submitButton").prop("disabled", true);
+    $("#pollButton").prop("disabled", true);
+
+    $("#userInput").select2({
+        placeholder: "Click to type",
+        minimumInputLength: 1,
+        ajax: { // instead of writing the function to execute the request we use Select2's convenient helper
+            url: "./api/play/words",
+            dataType: 'json',
+            quietMillis: 250,
+            data: function(term, page) {
+                return {
+                    q: term, // search term
+                };
+            },
+            results: function(data, page) { // parse the results into the format expected by Select2.
+                // since we are using custom formatting functions we do not need to alter the remote JSON data
+                var words = [];
+                for(var i = 0; i < data.length; i++) {
+                    words.push({
+                        id: data[i],
+                        text: data[i]
+                    });
                 }
+                return { results: words };
             }
-        });
-    };
-
-    $.ajax({
-        url: "./api/play",
-        dataType: "text",
-        success: function(data) {
-            playerId = data;
-            startGame();
         }
     });
 
