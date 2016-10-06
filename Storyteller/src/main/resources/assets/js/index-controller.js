@@ -6,8 +6,8 @@ $(function () {
         $(".imgs").addClass('scale');
         $("#startGame").fadeOut(2200);
         $("#rules").fadeOut(2200);
-        $("#createGame").fadeOut(2200);
-        $("#listGames").fadeOut(2200);
+        $("#openCreateGame").fadeOut(2200);
+        $("#openListGames").fadeOut(2200);
         setTimeout(function () {
             $.ajax({
                 url: "./api/play",
