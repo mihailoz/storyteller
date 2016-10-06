@@ -6,7 +6,7 @@ body.withBackground {
     background-size: cover;
 }
 
-#startGame {
+.startGame {
     width: 200px;
     height: 50px;
     background-color: #8B6746;
@@ -53,7 +53,7 @@ body.withBackground {
 }
 
 
-#startGame:hover {
+.startGame:hover {
     background-color: #C39C78;
     box-shadow: 0 4px 20px 0 #B88B39, 0px -4px 20px 0px #B88B39, 15px 0 20px 0 #733311, -15px 0 20px 0 #733311;
 }
@@ -185,7 +185,7 @@ body.withBackground {
 
 .content {
     position: absolute;
-    top: 25%;
+    top: 20%;
     width: 98%;
 }
 
@@ -364,4 +364,41 @@ ul.share-buttons img{
     position: absolute;
     bottom: 3%;
     right: 5%;
+}
+.lobby{
+  position: absolute;
+  left: 40%;
+  top: 40%;
+  padding: 10px 10px;
+  width: 18%;
+  border: 20px solid #000000;
+  border-radius: 20px;
+  background-color: rgba(255, 255, 255, 0.65);
+  color: black;
+  border: none;
+  font-family: font;
+  font-size: 20px;
+  border: none;
+  resize: none;
+}
+.startGame2{
+  position: absolute;
+  top: 110%;
+  left: 21%;
+  width: 200px;
+  height: 50px;
+  background-color: #8B6746;
+  outline: none;
+  color: #000000;
+  border: 4px solid #000000;
+  border-radius: 7px;
+  font-family: font;
+  font-size: 25px;
+  margin: auto;
+  box-shadow: 0 1px 20px 0 #B88B39, 0px -1px 20px 0px #B88B39, 5px 0 20px 0 #733311, -5px 0 20px 0 #733311;
+}
+
+.startGame2:hover {
+    background-color: #C39C78;
+    box-shadow: 0 4px 20px 0 #B88B39, 0px -4px 20px 0px #B88B39, 15px 0 20px 0 #733311, -15px 0 20px 0 #733311;
 }
