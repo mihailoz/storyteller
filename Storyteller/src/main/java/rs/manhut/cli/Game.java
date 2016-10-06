@@ -9,6 +9,7 @@ public class Game {
     private String gameName;
     private Integer playerNumber;
     private Boolean passwordProtected;
+    private Boolean isOwner;
 
     public String getGameId() {
         return gameId;
@@ -40,5 +41,13 @@ public class Game {
 
     public void setPasswordProtected(Boolean passwordProtected) {
         this.passwordProtected = passwordProtected;
+    }
+
+    public Boolean getOwner() {
+        return isOwner;
+    }
+
+    public void setOwner(Boolean owner) {
+        isOwner = owner;
     }
 }

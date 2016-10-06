@@ -1,12 +1,14 @@
 MIHAILO:
     - Podesiti server - kad dodje vreme za to
     - Pripremiti server za produkciju
-    - Napraviti premade-gameove
 ALEKSA:
-    - Smisliti kako da poubacujemo sve dank memes reci
+    - Napraviti ono za suggestedWords
 MARKO:
-    - Videti kako ubaciti share button-e za facebook/twitter (aleksa neka uleti kad ubacimo TRIE)
+    - Proveri da li je ono za share dobro uradjeno (sry, vrv sam ga obrisao i nmg da vratim... fuck)
+    - Sredi modale za Create Game, Join Game (posto si pravio onaj vote modal, pa znas kako)
 LUKA:
-    - Dorada izgleda gde treba
+    - Napraviti background za stranicu gameLobby (da ne koristimo opet skrol, mozda kao neka biblioteka onako blurovana) nemoj se mnogo muciti
+    - Pomozi ognjenu da napravite game lobby stranicu da lici na nesto (treba da pokazuje ime, i number of players) i ukoliko je igrac owner onda button treba da bude enabled
+    !!! ovo sam ja vec delimicno uradio, pazite da nes ne sjebete
 OGNJEN:
-    - Dorada izgleda gde treba
+    - Sredi dugmad na start page-u da se ponasaju kao start dugme, kad rutke napravi background ubaciti i srediti taj page (pogledaj iznad sta pise!!!)

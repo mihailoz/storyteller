@@ -21,11 +21,11 @@ $(function () {
 
     });
 
-    $("#createGame").on("click",function () {
+    $("#openCreateGame").on("click",function () {
       $('#kreiraj').modal("show");
     });
 
-    $("#listGames").click(function () {
+    $("#openListGames").click(function () {
         $('#nadji').modal("show");
     });
 

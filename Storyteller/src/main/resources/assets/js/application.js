@@ -66,7 +66,6 @@ $(function() {
                             checkStatus();
                         }, 700);
                     } else if (response.onTurn.string === "endGamePoll") {
-                        console.log("POLL IS ON");
                         $(".tajmer").hide();
                         if (!($('#myModal').hasClass('in')) && !pollFinished) {
                             $('#myModal').modal("show");
@@ -78,10 +77,6 @@ $(function() {
                     }
 
                 } else if (response.status.string === "gameFinished") {
-                    $('#pollButton').hide();
-                    $(".tajmer").show();
-                    $("#tajmer").text("The game has ended");
-
                     window.location.replace("./shareGame.html?" + gameId);
                 }
             }

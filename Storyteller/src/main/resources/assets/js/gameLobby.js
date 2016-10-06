@@ -4,7 +4,7 @@ $(function () {
 
     var checkStatus = function() {
         $.ajax({
-            url: "./api/play/status/" + playerId,
+            url: "./api/game/status/" + playerId,
             dataType: "text",
             success: function(data) {
 
@@ -13,9 +13,43 @@ $(function () {
                 } else {
                     var response = JSON.parse(data);
                     // If in game
-                    console.log(response);
+                    $("#playerNumberParagraph").text(response.playerNumber);
+                    $("#gameName").text(response.gameName);
+                    if(!response.owner) {
+                        $("#startGame").hide();
+                    } else {
+                        $("#startGame").show();
+                    }
+                    setTimeout(function() {
+                        checkStatus();
+                    }, 700);
                 }
             }
         });
-    }
+    };
+
+    $('#startGame').on('click', function () {
+        $.ajax({
+            type: "POST",
+            url: "./api/game/startGame/" + playerId,
+            dataType: "text",
+            success: function(data) {
+                if (data === "Game started") {
+                    window.location.href = "inGame.html?" + playerId;
+                } else {
+                    console.log("There has been an error");
+                }
+            }
+        });
+    });
+
+    checkStatus();
+
+    window.onbeforeunload = function() {
+        $.ajax({
+            type: "POST",
+            url: "./api/game/leave/" + playerId,
+            data: {}
+        });
+    };
 });

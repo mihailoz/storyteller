@@ -36,15 +36,15 @@ public class GameResource {
     @GET
     @Path("/createGame")
     public Response randomGame(@QueryParam("gameName") String gameName,
-                               @QueryParam("playerName") String playerName,
                                @QueryParam("gamePassword") String gamePassword) {
         try {
             String playerId = uid.randomUUID().toString();
 
-            Player p = new Player(playerId, null, playerName);
+            Player p = new Player(playerId, null, "anonymous");
             GameInstance gi = new GameInstance(uid.randomUUID().toString(), gameName, gamePassword);
 
             gi.setGameOwner(p.getId());
+            gi.addPlayer(p);
 
             queueingGamesList.add(gi);
 
@@ -53,7 +53,7 @@ public class GameResource {
                     .add("gameId", gi.getGameId()).build();
             return Response.ok(responseJson, MediaType.APPLICATION_JSON).build();
         } catch (Exception e) {
-            return Response.ok("Failed to create game!").build();
+            return Response.ok("Failed to create game!", MediaType.TEXT_PLAIN).build();
         }
     }
 
@@ -70,7 +70,7 @@ public class GameResource {
                 }
             }
             if(gi != null) {
-                return Response.ok("game-started").build();
+                return Response.ok("game-started", MediaType.TEXT_PLAIN).build();
             } else {
                 for(GameInstance g: this.getQueueingGamesList()) {
                     for(Player p: g.getPlayerList()) {
@@ -90,6 +90,11 @@ public class GameResource {
                     g.setGameName(gi.getGameName());
                     g.setPlayerNumber(gi.getPlayerList().size());
                     g.setPasswordProtected(pp);
+                    if(gi.getGameOwner().equals(playerId)) {
+                        g.setOwner(true);
+                    } else {
+                        g.setOwner(false);
+                    }
 
                     return Response.ok(mapper.writeValueAsString(g)).build();
                 } else {
@@ -97,7 +102,7 @@ public class GameResource {
                 }
             }
         } catch (Exception e) {
-            return Response.ok("Can't retrieve game data").build();
+            return Response.ok("Can't retrieve game data", MediaType.TEXT_PLAIN).build();
         }
     }
 
@@ -156,52 +161,93 @@ public class GameResource {
     }
 
     @POST
-    @Path("/player/{playerId}/{gameId}")
-    public Response startGame(@PathParam("playerId") String playerId,
-                              @PathParam("gameId") String gameId) {
+    @Path("/startGame/{playerId}")
+    public Response startGame(@PathParam("playerId") String playerId) {
         try {
             GameInstance gi = null;
             for(GameInstance g: this.getQueueingGamesList()) {
-                if(g.getGameId().equals(gameId) && g.getGameOwner().equals(playerId)) {
+                if (g.getGameOwner().equals(playerId)) {
                     gi = g;
                 }
             }
             if(gi != null) {
-                gi.run();
-                this.getQueueingGamesList().remove(gi);
                 this.getGameInstanceList().add(gi);
-                return Response.ok("Game started").build();
+                this.getQueueingGamesList().remove(gi);
+
+                final GameInstance runGi = gi;
+
+                Runnable startGame = new Runnable() {
+                    public void run() {
+                        runGi.run();
+                    }
+                };
+
+                new Thread(startGame).start();
+
+                return Response.ok("Game started", MediaType.TEXT_PLAIN).build();
             } else {
                 throw new Exception();
             }
         } catch (Exception e) {
-            return Response.ok("Game cannot be started").build();
+            return Response.ok("Game cannot be started", MediaType.TEXT_PLAIN).build();
         }
     }
 
     @GET
     @Path("/joinGame")
     public Response joinGame(@QueryParam("gameId") String gameId,
-                               @QueryParam("playerName") String playerName,
                                @QueryParam("gamePassword") String gamePassword) {
         try {
             GameInstance gi = null;
 
             for(GameInstance g: this.getQueueingGamesList()) {
-                if(gameId.equals(g.getGameId()) && gameId.equals(g.getGamePassword())) {
-                    gi = g;
+                if(gameId.equals(g.getGameId())) {
+                    if(g.getGamePassword() == null || g.getGamePassword().equals(gamePassword)) {
+                        gi = g;
+                    } else {
+                        throw new Exception("Password incorrect");
+                    }
                 }
             }
             if(gi != null) {
-                Player p = new Player(uid.randomUUID().toString(), gi, playerName);
+                Player p = new Player(uid.randomUUID().toString(), gi, "anonymous");
                 gi.addPlayer(p);
-                return Response.ok("Game joined").build();
+                return Response.ok(p.getId()).build();
             } else {
-                throw new Exception("Game not found");
+                throw new Exception("Password incorrect");
             }
         } catch (Exception e) {
-            return Response.ok(e.getMessage()).build();
+            return Response.ok("Password incorrect", MediaType.TEXT_PLAIN).build();
         }
+    }
+
+    @POST
+    @Path("/leave/{playerId}")
+    public Response leaveGame(@PathParam("playerId") String playerId) {
+        GameInstance gi = null;
+        Player pl = null;
+
+        for(GameInstance g: this.getQueueingGamesList()) {
+            for(Player p: g.getPlayerList()) {
+                if(p.getId().equals(playerId)) {
+                    gi = g;
+                    pl = p;
+                }
+            }
+        }
+
+        if(gi != null) {
+            gi.getPlayerList().remove(pl);
+            if (gi.getGameOwner().equals(playerId)) {
+                if (gi.getPlayerList().size() > 0) {
+                    gi.setGameOwner(gi.getPlayerList().get(0).getId());
+                } else {
+                    this.getQueueingGamesList().remove(gi);
+                }
+            }
+        }
+
+        return Response.ok("Left queue", MediaType.TEXT_PLAIN).build();
     }
 
 

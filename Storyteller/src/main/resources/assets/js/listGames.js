@@ -28,8 +28,10 @@ $(function () {
                        data: {
                            gameId: $(e.target).attr('id')
                        },
-                       success: function (data) {
-                           window.location.href = "gameLobby.html?" + data;
+                       complete: function (data) {
+                           if(data.responseText !== "Password incorrect") {
+                               window.location.href = "gameLobby.html?" + data.responseText;
+                           }
                        }
                    });
                 });
@@ -39,8 +41,12 @@ $(function () {
     };
 
     $("#searchInput").on("change", function () {
-        var searchTerm = $("#seachInput").val();
+        var searchTerm = $("#searchInput").val();
 
         searchGames(searchTerm);
+    });
+
+    $('#nadji').on('shown.bs.modal', function (e) {
+        searchGames("");
     });
 });

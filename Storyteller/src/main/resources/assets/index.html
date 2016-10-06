@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script type="text/javascript" src="./js/jquery-3.1.0.js"></script>
     <script type="text/javascript" src="./js/index-controller.js"></script>
+    <script type="text/javascript" src="./js/createGame.js"></script>
+    <script type="text/javascript" src="./js/listGames.js"></script>
     <script type="text/javascript" src="./js/bootstrap.js"></script>
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.css">
@@ -21,8 +23,8 @@
         <div class="content">
             <div class="button-container">
                 <button type="button" id="startGame" name="button">start game</button>
-                <button type="button" class="izgledDugmeta1" id="createGame" name="button">create game</button>
-                <button type="button" class="izgledDugmeta2" id="listGames" name="button">join game</button>
+                <button type="button" class="izgledDugmeta1" id="openCreateGame" name="button">create game</button>
+                <button type="button" class="izgledDugmeta2" id="openListGames" name="button">join game</button>
             </div>
         </div>
         <div id="rules" class="">
@@ -46,13 +48,14 @@
             <h4 class="modal-title">Create Game</h4>
           </div>
           <div class="modal-body">
+
             <input id="gameName">
-            <input id="playerName">
             <input type="checkbox" id="hasPassword">
             <input id="passwordInput">
-            <button id="createGame">Create game</button>
+
           </div>
           <div class="modal-footer">
+              <button id="createGame" type="button" class="btn btn-default">Create game</button>
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
           </div>
         </div>
