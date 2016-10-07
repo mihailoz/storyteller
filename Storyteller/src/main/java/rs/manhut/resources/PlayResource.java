@@ -158,11 +158,13 @@ public class PlayResource {
 
                         new Thread(turn).start();
                     } else {
-                        if(!wordChecker.checkWord(word)) {
-                            return Response.ok("Invalid word", MediaType.TEXT_PLAIN).build();
-                        } else {
+                        if(wordChecker.checkWord(word) || word.equals("endsentence")) {
                             if (game.getWordCount() != 0) {
-                                currentStory = game.getStoryString() + " " + word;
+                                if(word.equals("endsentence")) {
+                                    currentStory = game.getStoryString() + ".";
+                                } else {
+                                    currentStory = game.getStoryString() + " " + word;
+                                }
                             } else {
                                 currentStory = word;
                             }
@@ -176,6 +178,8 @@ public class PlayResource {
                             };
 
                             new Thread(turn).start();
+                        } else {
+                            return Response.ok("Invalid word", MediaType.TEXT_PLAIN).build();
                         }
                     }
                 }
@@ -219,7 +223,23 @@ public class PlayResource {
     public Response getSuggestedWords(@QueryParam("q") String keyword) {
         try {
             keyword = keyword.toLowerCase();
-            List suggested = wordChecker.suggestWord(keyword);
+
+            List suggested=new ArrayList<String>();
+            if(keyword.equals(".")) {
+                suggested.add(".");
+            } else {
+                Integer number;
+                try
+                {
+                    number=Integer.parseInt(keyword);
+                    suggested.add(keyword);
+                }
+                catch(Exception e)
+                {
+                    suggested = wordChecker.suggestWord(keyword);
+                }
+            }
+
             GenericEntity<List<String>> entity =
                     new GenericEntity<List<String>>(suggested) {};
             return Response.ok(entity).build();

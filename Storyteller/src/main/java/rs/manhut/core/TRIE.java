@@ -33,13 +33,19 @@ public class TRIE {
     }
 
     public Boolean checkWord(String word) {
-        if(word.equals(".")) {
+        try
+        {
+            Integer number=Integer.parseInt(word);
             return true;
-        } else {
-            if(this.root.checkForWord(word)) {
+        } catch (Exception e) {
+            if (word.equals(".")) {
                 return true;
             } else {
-                return false;
+                if (this.root.checkForWord(word)) {
+                    return true;
+                } else {
+                    return false;
+                }
             }
         }
     }

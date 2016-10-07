@@ -85,6 +85,9 @@ $(function() {
 
     $('#submitButton').on('click', function(e) {
         var word = $("#userInput").val();
+        if(word === ".") {
+            word = "endSentence";
+        }
         $.ajax({
             type: "POST",
             url: "./api/play/turn/" + playerId + "/" + word,
