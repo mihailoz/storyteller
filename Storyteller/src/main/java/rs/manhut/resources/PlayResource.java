@@ -158,15 +158,33 @@ public class PlayResource {
 
                         new Thread(turn).start();
                     } else {
-                        if(wordChecker.checkWord(word) || word.equals("endsentence")) {
+                        if(wordChecker.checkWord(word) || word.equals("endsentencedot") || word.equals("endsentencequestionmark") || word.equals("endsentenceexclamationmark")) {
                             if (game.getWordCount() != 0) {
-                                if(word.equals("endsentence")) {
+                                if(word.equals("endsentencedot")) {
                                     currentStory = game.getStoryString() + ".";
-                                } else {
+                                }
+                                else if(word.equals("endsentencequestionmark")) {
+                                    currentStory = game.getStoryString() + "?";
+                                }
+                                else if(word.equals("endsentenceexclamationmark")) {
+                                    currentStory = game.getStoryString() + "!";
+                                }
+                                else {
                                     currentStory = game.getStoryString() + " " + word;
                                 }
                             } else {
-                                currentStory = word;
+                                if(word.equals("endsentencedot")) {
+                                    currentStory = game.getStoryString() + ".";
+                                }
+                                else if(word.equals("endsentencequestionmark")) {
+                                    currentStory = game.getStoryString() + "?";
+                                }
+                                else if(word.equals("endsentenceexclamationmark")) {
+                                    currentStory = game.getStoryString() + "!";
+                                }
+                                else {
+                                    currentStory = word;
+                                }
                             }
                             game.setWordCount(game.getWordCount() + 1);
                             game.setStoryString(currentStory);
@@ -227,7 +245,16 @@ public class PlayResource {
             List suggested=new ArrayList<String>();
             if(keyword.equals(".")) {
                 suggested.add(".");
-            } else {
+
+            } else if(keyword.equals("?")) {
+                suggested.add("?");
+            }
+            else if(keyword.equals("!"))
+            {
+                suggested.add("!");
+            }
+                else
+             {
                 Integer number;
                 try
                 {

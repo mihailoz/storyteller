@@ -40,7 +40,14 @@ public class TRIE {
         } catch (Exception e) {
             if (word.equals(".")) {
                 return true;
-            } else {
+            }
+            else if(word.equals("?")) {
+                return true;
+            }
+            else if(word.equals("!")) {
+                return true;
+            }
+            else {
                 if (this.root.checkForWord(word)) {
                     return true;
                 } else {
@@ -150,7 +157,6 @@ public class TRIE {
                     return 35;
                 case '9':
                     return 36;
-
                 default:
                     return -1;
             }
@@ -235,6 +241,7 @@ public class TRIE {
                     return '8';
                 case 36:
                     return '9';
+
                 default:
                     return '/';
             }

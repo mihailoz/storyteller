@@ -86,8 +86,15 @@ $(function() {
     $('#submitButton').on('click', function(e) {
         var word = $("#userInput").val();
         if(word === ".") {
-            word = "endSentence";
+            word = "endSentenceDot";
         }
+        if(word ==="?") {
+            word = "endSentenceQuestionMark";
+        }
+        if(word === "!") {
+            word = "endSentenceExclamationMark";
+        }
+
         $.ajax({
             type: "POST",
             url: "./api/play/turn/" + playerId + "/" + word,
