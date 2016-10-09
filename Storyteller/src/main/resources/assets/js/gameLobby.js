@@ -13,8 +13,8 @@ $(function () {
                 } else {
                     var response = JSON.parse(data);
                     // If in game
-                    $("#playerNumberParagraph").text(response.playerNumber);
-                    $("#gameName").text(response.gameName);
+                    $("#playerNumberParagraph").text("number of players: " + response.playerNumber);
+                    $("#gameName").text(" in game lobby: " + response.gameName);
                     if(!response.owner) {
                         $("#startGame").hide();
                     } else {
