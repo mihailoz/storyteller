@@ -82,8 +82,8 @@ $(function() {
             }
         });
     }
-
-    $('#submitButton').on('click', function(e) {
+    
+    var submitFunc = function (e) {
         var word = $("#userInput").val();
         if(word === ".") {
             word = "endSentenceDot";
@@ -106,7 +106,9 @@ $(function() {
                 $("#userInput").val("");
             }
         });
-    });
+    };
+
+    $('#submitButton').on('click', submitFunc);
 
     $("#pollButton").on('click', function() {
         $.ajax({
@@ -176,7 +178,7 @@ $(function() {
                 return { results: words };
             }
         }
-    });
+    }).on("select2-selecting", submitFunc);
 
     window.onbeforeunload = function() {
         $.ajax({
