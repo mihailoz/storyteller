@@ -40,7 +40,7 @@ $(function() {
 
                         if (tajmer === false) {
                             $(".tajmer").show();
-                            timerFunc(8);
+                            timerFunc(10);
                         }
                         tajmer = true;
 
@@ -102,7 +102,7 @@ $(function() {
                 $(".tajmer").hide();
                 $("#submitButton").prop("disabled", true);
                 $("#pollButton").prop("disabled", true);
-                $("#userInput").val("");
+                $("#userInput").select2('val', '');
             }
         });
     };

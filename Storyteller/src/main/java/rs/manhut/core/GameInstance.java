@@ -27,7 +27,7 @@ public class GameInstance extends Thread {
     private List<Poll> endGamePoll;
     private Boolean pollActive = false;
 
-    private static Integer turnLength = 9;
+    private static Integer turnLength = 11;
 
     public GameInstance (String id) {
         this.setGameId(id);
