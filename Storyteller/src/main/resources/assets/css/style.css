@@ -411,22 +411,26 @@ ul.share-buttons img {
     background-image: url("../imgs/modalimg.jpg");
     position: absolute;
     background-position: center;
+    font-family: font;
 }
 
 .inp2 {
     width: 200px;
-    color: black;
-    background-color: #BC8A57;
+    background-color: #ffffff;
     border: 2px solid #000000;
+    margin-top: 20px;
     margin-bottom: 20px;
     border-radius: 5px;
     font-size: 16px;
+    margin-right: 20px;
+    font-family: font;
 }
 
 #gameTable td, #gameTable th {
     border: 2px solid #B78D63;
     padding-left: 10px;
     padding-right: 10px;
+    font-family: font;
 }
 
 ::-webkit-input-placeholder {
@@ -482,4 +486,3 @@ ul.share-buttons img {
   background-color: #C39C78;
   box-shadow: 0 4px 20px 0 #B88B39, 0px -4px 20px 0px #B88B39, 15px 0 20px 0 #733311, -15px 0 20px 0 #733311;
 }
-
