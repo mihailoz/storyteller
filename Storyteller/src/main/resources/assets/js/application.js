@@ -83,8 +83,7 @@ $(function() {
         });
     }
     
-    var submitFunc = function (e) {
-        var word = $("#userInput").val();
+    var submitFunc = function (word) {
         if(word === ".") {
             word = "endSentenceDot";
         }
@@ -108,7 +107,10 @@ $(function() {
         });
     };
 
-    $('#submitButton').on('click', submitFunc);
+    $('#submitButton').on('click', function () {
+        var word = $("#userInput").val();
+        submitFunc(word);
+    });
 
     $("#pollButton").on('click', function() {
         $.ajax({
@@ -178,7 +180,9 @@ $(function() {
                 return { results: words };
             }
         }
-    }).on("select2-selecting", submitFunc);
+    }).on("select2-selecting", function (e) {
+        submitFunc(e.val);
+    });
 
     window.onbeforeunload = function() {
         $.ajax({
