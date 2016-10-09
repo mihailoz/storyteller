@@ -367,9 +367,8 @@ ul.share-buttons img {
 .lobby{
   position: absolute;
   left: 40%;
-  top: 40%;
-  padding: 10px 10px;
-  width: 18%;
+  top: 20%;
+  padding: 10px 95px 10px 10px;
   border: 20px solid #000000;
   border-radius: 20px;
   background-color: rgba(255, 255, 255, 0.65);
@@ -383,9 +382,8 @@ ul.share-buttons img {
 .startGame2{
   position: absolute;
   top: 110%;
-  left: 20%;
-  width: 200px;
-  height: 50px;
+  left: 22%;
+  padding: 5px 16px;
   background-color: #8B6746;
   outline: none;
   color: #000000;
@@ -411,22 +409,26 @@ ul.share-buttons img {
     background-image: url("../imgs/modalimg.jpg");
     position: absolute;
     background-position: center;
+    font-family: font;
 }
 
 .inp2 {
     width: 200px;
-    color: black;
-    background-color: #BC8A57;
+    background-color: #ffffff;
     border: 2px solid #000000;
+    margin-top: 20px;
     margin-bottom: 20px;
     border-radius: 5px;
     font-size: 16px;
+    margin-right: 20px;
+    font-family: font;
 }
 
 #gameTable td, #gameTable th {
     border: 2px solid #B78D63;
     padding-left: 10px;
     padding-right: 10px;
+    font-family: font;
 }
 
 ::-webkit-input-placeholder {
@@ -482,4 +484,3 @@ ul.share-buttons img {
   background-color: #C39C78;
   box-shadow: 0 4px 20px 0 #B88B39, 0px -4px 20px 0px #B88B39, 15px 0 20px 0 #733311, -15px 0 20px 0 #733311;
 }
-
