@@ -1,3 +1,11 @@
+server:
+  applicationConnectors:
+  - type: http
+    port: 80
+  adminConnectors:
+  - type: http
+    port: 9001
+
 database:
   # the name of your JDBC driver
   driverClass: org.postgresql.Driver
