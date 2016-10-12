@@ -17,7 +17,7 @@ $(function () {
 
                 for (var i = 0; i < gameData.length; i++) {
                     var g = gameData[i];
-                    var $tablerow = '<tr class="gameRow" id="' + g.gameId + '"><td>' + g.gameName + '</td><td>' + g.playerNumber + '</td><td>' + g.passwordProtected + '</td><td><button class="joinGameButton" id="' + g.gameId + '">Join</button></td></tr>';
+                    var $tablerow = '<tr class="gameRow" id="' + g.gameId + '"><td>' + g.gameName + '</td><td>' + g.playerNumber + '</td><td>' + g.passwordProtected + '</td><td><button class="joinGameButton" id="' + g.gameId + '">join</button></td></tr>';
                     $('#gameTable tr:last').after($tablerow);
                 }
 
@@ -35,6 +35,10 @@ $(function () {
                        }
                    });
                 });
+                
+                setTimeout(function () {
+                    searchGames(searchTerm);
+                }, 3000);
             }
         });
 

@@ -429,6 +429,23 @@ ul.share-buttons img {
     padding-left: 10px;
     padding-right: 10px;
     font-family: font;
+    text-align: center;
+}
+
+#gameTable button {
+    background-color: #8B6746;
+    outline: none;
+    color: #000000;
+    border: 1px solid #000000;
+    border-radius: 3px;
+    font-family: font;
+    font-size: 14px;
+    margin: auto;
+}
+
+#gameTable button:hover {
+    background-color: #C39C78;
+    box-shadow: 0 1px 4px 0 #B88B39, 0px -1px 4px 0px #B88B39, 1px 0 4px 0 #733311, -1px 0 4px 0 #733311;
 }
 
 ::-webkit-input-placeholder {
