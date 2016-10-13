@@ -4,7 +4,8 @@ $(function () {
             type: "GET",
             url: "./api/game/createGame",
             data: {
-                gameName: $("#gameName").val()
+                gameName: $("#gameName").val(),
+                gamePassword: $("#passwordInput").val()
             },
             success: function(data) {
                 window.location.href = "gameLobby.html?" + data.playerId.string;

@@ -277,7 +277,6 @@ img {
     background-image: url('../imgs/modalimg.jpg');
     background-position: center;
     position: fixed;
-    width: 300px;
     height: 200px;
 }
 

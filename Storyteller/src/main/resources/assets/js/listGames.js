@@ -17,23 +17,44 @@ $(function () {
 
                 for (var i = 0; i < gameData.length; i++) {
                     var g = gameData[i];
-                    var $tablerow = '<tr class="gameRow" id="' + g.gameId + '"><td>' + g.gameName + '</td><td>' + g.playerNumber + '</td><td>' + g.passwordProtected + '</td><td><button class="joinGameButton" id="' + g.gameId + '">join</button></td></tr>';
+                    var $tablerow = '<tr class="gameRow" id="' + g.gameId + '"><td>' + g.gameName + '</td><td>' + g.playerNumber + '</td><td>' + g.passwordProtected + '</td><td><button class="joinGameButton" id="' + g.gameId + '" data-hasPass="' + g.passwordProtected + '">join</button></td></tr>';
                     $('#gameTable tr:last').after($tablerow);
                 }
 
                 $(".joinGameButton").on('click', function (e) {
-                   $.ajax({
-                       type: "GET",
-                       url: "./api/game/joinGame",
-                       data: {
-                           gameId: $(e.target).attr('id')
-                       },
-                       complete: function (data) {
-                           if(data.responseText !== "Password incorrect") {
-                               window.location.href = "gameLobby.html?" + data.responseText;
+                   if($(e.target)[0].dataset.haspass === "true") {
+                       $("#nadji").modal("hide");
+                       $("#enterPassword").modal("show");
+                        
+                       $("#submitPassword").on('click', function (ev) {
+                           $.ajax({
+                               type: "GET",
+                               url: "./api/game/joinGame",
+                               data: {
+                                   gameId: $(e.target).attr('id'),
+                                   gamePassword: $("#joinPasswordInput").val()
+                               },
+                               complete: function (data) {
+                                   if(data.responseText !== "Password incorrect") {
+                                       window.location.href = "gameLobby.html?" + data.responseText;
+                                   }
+                               }
+                           });
+                       });
+                   } else {
+                       $.ajax({
+                           type: "GET",
+                           url: "./api/game/joinGame",
+                           data: {
+                               gameId: $(e.target).attr('id')
+                           },
+                           complete: function (data) {
+                               if(data.responseText !== "Password incorrect") {
+                                   window.location.href = "gameLobby.html?" + data.responseText;
+                               }
                            }
-                       }
-                   });
+                       });
+                   }
                 });
                 
                 setTimeout(function () {

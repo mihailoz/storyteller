@@ -46,7 +46,7 @@ public class PlayResource {
         Player p = new Player(playerId, null, defaultName);
         playersQueueing.add(p);
 
-        if(playersQueueing.size() > 2) {
+        if(playersQueueing.size() > 4) {
             GameInstance gi = new GameInstance(uid.randomUUID().toString());
 
             //TODO for first n players
