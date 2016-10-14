@@ -22,7 +22,7 @@ public class TRIE {
         String line;
         this.root = new node();
         try {
-            FileReader words = new FileReader("./src/main/resources/words.txt");
+            FileReader words = new FileReader("./words.txt");
             BufferedReader bufferedReader = new BufferedReader(words);
             while ((line = bufferedReader.readLine()) != null) {
                 this.root.insertWord(line);

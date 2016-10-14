@@ -115,10 +115,10 @@ public class GameResource {
             if(keyword != null) {
                 for(Integer i = 0; i < 20 && i < this.getQueueingGamesList().size(); i++) {
                     GameInstance gi = this.getQueueingGamesList().get(i);
-                    if(gi.getGameName().contains(keyword)) {
+                    if(gi.getGameName().toLowerCase().contains(keyword.toLowerCase())) {
                         Boolean pp = false;
 
-                        if(gi.getGamePassword() != null) {
+                        if(gi.getGamePassword() != null && !gi.getGamePassword().equals("")) {
                             pp = true;
                         }
 
@@ -139,7 +139,7 @@ public class GameResource {
                     GameInstance gi = this.getQueueingGamesList().get(i);
                     Boolean pp = false;
 
-                    if(gi.getGamePassword() != null) {
+                    if(gi.getGamePassword() != null && !gi.getGamePassword().equals("")) {
                         pp = true;
                     }
 

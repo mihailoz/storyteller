@@ -1,6 +1,5 @@
 $(function () {
     var searchGames = function (searchTerm) {
-
         $.ajax({
             url: "api/game/listGames",
             data: {
@@ -46,7 +45,8 @@ $(function () {
                            type: "GET",
                            url: "./api/game/joinGame",
                            data: {
-                               gameId: $(e.target).attr('id')
+                               gameId: $(e.target).attr('id'),
+                               gamePassword: ""
                            },
                            complete: function (data) {
                                if(data.responseText !== "Password incorrect") {
@@ -58,8 +58,8 @@ $(function () {
                 });
                 
                 setTimeout(function () {
-                    searchGames(searchTerm);
-                }, 3000);
+                    searchGames($("#searchInput").val());
+                }, 10000);
             }
         });
 
@@ -72,6 +72,6 @@ $(function () {
     });
 
     $('#nadji').on('shown.bs.modal', function (e) {
-        searchGames("");
+        searchGames($("#searchInput").val());
     });
 });
