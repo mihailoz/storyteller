@@ -7,7 +7,7 @@ import java.io.*;
  */
 public class GameHistoryController {
 
-    final private String filePath = System.getProperty("user.home") + "/Storyteller/game-history/";
+    final private String filePath = "/home/storywriters/Storyteller/game-history/";
 
     public void writeGameHistory(String gameId, String gameStory) {
         try {
