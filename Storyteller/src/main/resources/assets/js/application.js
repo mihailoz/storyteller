@@ -4,7 +4,7 @@ $(function() {
         tajmer = false;
 
     var timerFunc = function(br) {
-        $("#tajmer").text(br);
+        $("#tajmer").text("Your turn:"+ br);
         if (br > 0) {
             setTimeout(function() {
                 timerFunc(br - 1);
@@ -82,7 +82,7 @@ $(function() {
             }
         });
     }
-    
+
     var submitFunc = function (word) {
         if(word === ".") {
             word = "endSentenceDot";
@@ -157,7 +157,7 @@ $(function() {
     $("#pollButton").prop("disabled", true);
 
     $("#userInput").select2({
-        placeholder: "Click to type",
+        placeholder: "click to type",
         minimumInputLength: 1,
         ajax: { // instead of writing the function to execute the request we use Select2's convenient helper
             url: "./api/play/words",
