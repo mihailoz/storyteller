@@ -70,19 +70,6 @@ body.withBackground2 {
     right: 1%;
 }
 
-.inp {
-      font-family: font;
-    position: relative;
-    top: 8%;
-    width: 270px;
-    height: auto;
-    color: black;
-    background-color: #AC8F63;
-    border: 4px solid #000000;
-    border-radius: 7px;
-    font-size: 20px;
-}
-
 .inp:focus {
     outline: none !important;
     border: 4px solid #000000;
@@ -94,6 +81,27 @@ body.withBackground2 {
 
 .select2-container, .select2-choice, .select2-container .select2-choice, .select2-drop, .select2-search input, .select2-results .select2-no-results, .select2-results .select2-searching, .select2-results .select2-ajax-error {
     background-color: #AC8F63;
+    font-size: 1vw;
+}
+
+.inp {
+    font-family: font;
+    position: relative;
+    top: 8%;
+    width: 100%;
+    height: auto;
+    color: black;
+    background-color: #AC8F63;
+    border: 4px solid #000000;
+    border-radius: 7px;
+    font-size: 20px;
+    font-size: 1.3vw;
+}
+
+.select2-container .select2-choice {
+    height: 2vw;
+    background-image: none;
+    font-size: 1.3vw;
 }
 
 .select2-default {
@@ -108,12 +116,12 @@ body.withBackground2 {
 .select2-container .select2-choice>.select2-chosen {
     background-color: #AC8F63;
     color: #000000 !important;
-    padding: 5px 20px;
+    padding: 0.25vw 1vw;
+    line-height: normal;
     margin: 0px;
 }
 
 .select2-container .select2-choice {
-    height: 34px;
     padding: 0px;
     border: 0px;
     border-radius: 0px;
@@ -124,7 +132,7 @@ body.withBackground2 {
 }
 
 .leftside {
-    width: 270px;
+    width: 15%;
     height: 100%;
     position: absolute;
     left: 6%;
@@ -134,6 +142,7 @@ body.withBackground2 {
     /*width: 7.8%;*/
     position: relative;
     padding: 5px 20px;
+    padding: 0.25vw 1vw;
     background-color: #AC8F63;
     outline: none;
     color: #000000;
@@ -141,10 +150,11 @@ body.withBackground2 {
     border-radius: 7px;
     font-family: font;
     font-size: 20px;
+    font-size: 1.3vw;
     top: 16%;
-    width: 140px;
-    margin-right: 65px;
-    margin-left: 65px;
+    width: 50%;
+    margin-right: 25%;
+    margin-left: 25%;
 }
 
 #submitButton:disabled, #submitButton:disabled:hover {
@@ -157,6 +167,7 @@ body.withBackground2 {
 
 #pollButton {
     padding: 5px 50px;
+    padding: 0.25vw 2vw;
     background-color: #AC8F63;
     outline: none;
     color: #000000;
@@ -164,10 +175,11 @@ body.withBackground2 {
     border-radius: 7px;
     font-family: font;
     font-size: 20px;
+    font-size: 1.3vw;
     margin: auto;
     position: relative;
     top: 70%;
-    width: 270px;
+    width: 100%;
 }
 
 .tajmer {
@@ -179,6 +191,7 @@ body.withBackground2 {
     left: 11%;
     width: 20%;
     font-size: 40px;
+    font-size: 1.6vw;
 }
 
 #pollButton:hover {
@@ -225,11 +238,27 @@ img {
 .txt {
     background-color: rgba(0, 0, 0, 0);
     position: absolute;
+    left: 46%;
+    top: 15%;
+    width: 22%;
+    height: 60%;
+    font-size: 18px;
+    font-size: 1.25vw;
+    overflow-y: scroll;
+    resize: none;
+    font-family: font;
+    border: none;
+}
+
+.txt-centered {
+    background-color: rgba(0, 0, 0, 0);
+    position: absolute;
     left: 36%;
     top: 15%;
     width: 22%;
     height: 60%;
     font-size: 18px;
+    font-size: 1.25vw;
     overflow-y: scroll;
     resize: none;
     font-family: font;

@@ -28,6 +28,7 @@ public class GameInstance extends Thread {
     private Boolean pollActive = false;
 
     private static Integer turnLength = 11;
+    private static Integer pollLength = 6;
 
     public GameInstance (String id) {
         this.setGameId(id);
@@ -38,6 +39,14 @@ public class GameInstance extends Thread {
         this.setGameId(id);
         this.setGameName(gameName);
         this.setGamePassword(gamePassword);
+    }
+
+    public static Integer getPollLength() {
+        return pollLength;
+    }
+
+    public static void setPollLength(Integer pollLength) {
+        GameInstance.pollLength = pollLength;
     }
 
     public void run () {
@@ -90,7 +99,7 @@ public class GameInstance extends Thread {
             this.setPollActive(true);
 
             try {
-                String result = this.getFuture().get(this.getTurnLength(), TimeUnit.SECONDS);
+                String result = this.getFuture().get(this.getPollLength(), TimeUnit.SECONDS);
             } catch (TimeoutException e) {
                     this.setPollActive(false);
 
