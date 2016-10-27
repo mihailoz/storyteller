@@ -28,5 +28,13 @@ $(function () {
     $("#openListGames").click(function () {
         $('#nadji').modal("show");
     });
-
+$("#english").click(function(){
+  location.href = "index.html";
+});
+$("#german").click(function(){
+  location.href = "indexgerman.html";
+});
+$("#russian").click(function(){
+  location.href = "indexrussian.html";
+});
 });

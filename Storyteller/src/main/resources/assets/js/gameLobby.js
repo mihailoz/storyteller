@@ -28,6 +28,22 @@ $(function () {
         });
     };
 
+  /*var submitFunc2 = function (word) {
+        $.ajax({
+            type: "POST",
+            url: "./api/play/turn/" + playerId + "/" + word,
+            data: {},
+            success: function(data) {
+                $("#typechat").val("");
+            }
+        });
+    };
+    $('#send').on('click', function () {
+        var word = $("#typechat").val();
+        submitFunc2(word);
+    });
+*/
+
     $('#startGame').on('click', function () {
         $.ajax({
             type: "POST",

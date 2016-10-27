@@ -26,6 +26,63 @@ body.withBackground2 {
     margin: auto;
     box-shadow: 0 1px 20px 0 #B88B39, 0px -1px 20px 0px #B88B39, 5px 0 20px 0 #733311, -5px 0 20px 0 #733311;
 }
+#english{
+  background:url('../imgs/english.png');
+  background-repeat: no-repeat ;
+  position: absolute;
+  top:1350%;
+  left: 95%;
+  height: 30px;
+  width: 50px;
+
+
+}
+.chatbox{
+position: absolute;
+top: 5%;
+left: 5%;
+}
+.chat{
+  overflow-y: scroll;
+  resize: none;
+
+  border: none;
+  width: 400px;
+  height: 500px;
+}
+.send{
+  position: absolute;
+  left: 350px;
+  width: 50px;
+}
+.typechat{
+position: absolute;
+left: 0%;
+  width: 400px
+}
+
+#german{
+  background:url('../imgs/german.png');
+  background-repeat: no-repeat;
+  position: absolute;
+  top:1350%;
+  left: 90%;
+  height: 30px;
+  width: 50px;
+
+
+}
+#russian{
+  background:url('../imgs/russian.png');
+  background-repeat: no-repeat  ;
+  position: absolute;
+  top:1350%;
+  left: 85%;
+  height: 30px;
+  width: 50px;
+
+
+}
 
 .izgledDugmeta1 {
     position: absolute;
