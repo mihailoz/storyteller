@@ -58,9 +58,13 @@ public class TRIE {
     }
 
     public List<String> suggestWord(String word) {
-        List<String> suggested = new ArrayList<String>();
-        this.root.suggestWord(word, suggested);
-        return suggested;
+        try {
+            List<String> suggested = new ArrayList<String>();
+            this.root.suggestWord(word, suggested);
+            return suggested;
+        } catch (Exception e) {
+            return new ArrayList<String>();
+        }
     }
 
 

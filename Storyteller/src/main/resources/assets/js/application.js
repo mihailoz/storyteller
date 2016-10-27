@@ -166,6 +166,7 @@ $(function() {
             data: function(term, page) {
                 return {
                     q: term, // search term
+                    gameId: gameId
                 };
             },
             results: function(data, page) { // parse the results into the format expected by Select2.

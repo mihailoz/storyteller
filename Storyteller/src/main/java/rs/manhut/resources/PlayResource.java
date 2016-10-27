@@ -13,6 +13,8 @@ import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by mihailo on 2.9.16..
@@ -158,7 +160,13 @@ public class PlayResource {
 
                         new Thread(turn).start();
                     } else {
-                        if(wordChecker.checkWord(word) || word.equals("endsentencedot") || word.equals("endsentencequestionmark") || word.equals("endsentenceexclamationmark")) {
+                        Pattern pattern = Pattern.compile("\\s");
+                        Matcher matcher = pattern.matcher(word);
+                        boolean found = matcher.find();
+
+                        if((wordChecker.checkWord(word) || (!game.getLiteratureMode() && !found)) || word.equals("endsentencedot") || word.equals("endsentencequestionmark") || word.equals("endsentenceexclamationmark")) {
+
+
                             if (game.getWordCount() != 0) {
                                 if(word.equals("endsentencedot")) {
                                     currentStory = game.getStoryString() + ".";
@@ -238,9 +246,17 @@ public class PlayResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/words")
-    public Response getSuggestedWords(@QueryParam("q") String keyword) {
+    public Response getSuggestedWords(@QueryParam("q") String keyword,
+                                      @QueryParam("gameId") String gameId) {
         try {
             keyword = keyword.toLowerCase();
+            boolean literature = false;
+
+            for(GameInstance gi: this.getGameInstanceList()) {
+                if(gi.getGameId().equals(gameId)) {
+                    literature = gi.getLiteratureMode();
+                }
+            }
 
             List suggested=new ArrayList<String>();
             if(keyword.equals(".")) {
@@ -253,7 +269,7 @@ public class PlayResource {
             {
                 suggested.add("!");
             }
-                else
+            else
              {
                 Integer number;
                 try
@@ -264,6 +280,9 @@ public class PlayResource {
                 catch(Exception e)
                 {
                     suggested = wordChecker.suggestWord(keyword);
+                    if(!literature) {
+                        suggested.add(keyword);
+                    }
                 }
             }
 

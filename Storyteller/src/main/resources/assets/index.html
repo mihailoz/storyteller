@@ -11,13 +11,13 @@
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
-    
+
     <meta property="og:url"                content="http://storywrite.rs" />
     <meta property="og:type"               content="article" />
     <meta property="og:title"              content="Storywrite.rs" />
     <meta property="og:description"        content="Writes stories with others and share the laugh!" />
     <meta property="og:image"              content="http://storywrite.rs/imgs/logo.jpg" />
-    
+
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="Storywrite.rs">
     <meta name="twitter:description" content="Writes stories with others and share the laugh!">
@@ -60,10 +60,14 @@
                     <h4 class="modal-title"><b>create game<b></h4>
                 </div>
                 <div class="modal-body">
-
-                    <input id="gameName" class="inp2" placeholder="name">
-                    <input id="passwordInput" class="inp2" placeholder="password">
-
+                    <div class="row">
+                        <input id="gameName" class="inp2" placeholder="name">
+                        <input id="passwordInput" class="inp2" placeholder="password">
+                    </div>
+                    <div>
+                        <input id="literatureMode" type="checkbox" style="margin: auto;"/>
+                        Literature mode (only allows dictionary words)
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button id="createGame" type="button" class="btn myButtonClose">create game</button>

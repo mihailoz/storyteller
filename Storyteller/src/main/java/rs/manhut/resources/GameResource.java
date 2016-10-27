@@ -36,12 +36,15 @@ public class GameResource {
     @GET
     @Path("/createGame")
     public Response randomGame(@QueryParam("gameName") String gameName,
-                               @QueryParam("gamePassword") String gamePassword) {
+                               @QueryParam("gamePassword") String gamePassword,
+                               @QueryParam("literatureMode") Boolean literature) {
         try {
             String playerId = uid.randomUUID().toString();
 
             Player p = new Player(playerId, null, "anonymous");
             GameInstance gi = new GameInstance(uid.randomUUID().toString(), gameName, gamePassword);
+
+            gi.setLiteratureMode(literature);
 
             gi.setGameOwner(p.getId());
             gi.addPlayer(p);

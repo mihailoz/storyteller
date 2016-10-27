@@ -15,6 +15,7 @@ public class GameInstance extends Thread {
     private String gameName;
     private String gamePassword;
     private String gameOwner;
+    private Boolean literatureMode = false;
 
     private String storyString = "";
     private List<Player> playerList = new ArrayList<Player>();
@@ -259,6 +260,14 @@ public class GameInstance extends Thread {
 
     public void setGameOwner(String gameOwner) {
         this.gameOwner = gameOwner;
+    }
+
+    public Boolean getLiteratureMode() {
+        return literatureMode;
+    }
+
+    public void setLiteratureMode(Boolean literatureMode) {
+        this.literatureMode = literatureMode;
     }
 }
 
