@@ -7,5 +7,9 @@ $(function () {
         success: function(data) {
             $('#storyParagraph').text(data);
         }
-    })
+    });
+    
+    $('.back-button').on('click', function () {
+       window.location.replace("./index.html"); 
+    });
 });

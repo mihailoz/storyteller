@@ -116,7 +116,8 @@ left: 0%;
     box-shadow: 0 1px 20px 0 #B88B39, 0px -1px 20px 0px #B88B39, 5px 0 20px 0 #733311, -5px 0 20px 0 #733311;
 }
 
-.startGame:hover {
+.startGame:hover,
+.back-button:hover {
     background-color: #C39C78;
     box-shadow: 0 4px 20px 0 #B88B39, 0px -4px 20px 0px #B88B39, 15px 0 20px 0 #733311, -15px 0 20px 0 #733311;
 }
@@ -564,6 +565,23 @@ ul.share-buttons img {
 :-ms-input-placeholder {
     /* Internet Explorer 10-11 */
     color: #4D453D;
+}
+
+.back-button {
+    position: absolute;
+    width: 200px;
+    top: 7%;
+    left: 5%;
+    height: 50px;
+    background-color: #8B6746;
+    outline: none;
+    color: #000000;
+    border: 4px solid #000000;
+    border-radius: 7px;
+    font-family: font;
+    font-size: 25px;
+    margin: auto;
+    box-shadow: 0 1px 20px 0 #B88B39, 0px -1px 20px 0px #B88B39, 5px 0 20px 0 #733311, -5px 0 20px 0 #733311;
 }
 
 .myButtonClose {
