@@ -8,6 +8,7 @@ import rs.manhut.core.GameInstance;
 import rs.manhut.resources.GameResource;
 import rs.manhut.resources.PlayResource;
 import rs.manhut.resources.HistoryResource;
+import rs.manhut.websockets.WebsocketBundle;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +16,7 @@ import java.util.UUID;
 
 public class StorytellerApplication extends Application<StorytellerConfiguration> {
 
-    private List<GameInstance> gameInstanceList = new ArrayList<GameInstance>();
+    public static List<GameInstance> gameInstanceList = new ArrayList<GameInstance>();
 
     public static void main(final String[] args) throws Exception {
         new StorytellerApplication().run(args);
@@ -29,6 +30,7 @@ public class StorytellerApplication extends Application<StorytellerConfiguration
     @Override
     public void initialize(final Bootstrap<StorytellerConfiguration> bootstrap) {
         bootstrap.addBundle(new AssetsBundle("/assets/", "/", "index.html"));
+        bootstrap.addBundle(new WebsocketBundle());
     }
 
     @Override
@@ -37,8 +39,8 @@ public class StorytellerApplication extends Application<StorytellerConfiguration
 
         UUID storytellerUid = UUID.fromString("38400000-8cf0-11bd-b23e-10b96e4ef00d");
 
-        final PlayResource playResource = new PlayResource(this.getGameInstanceList(), storytellerUid);
-        final GameResource gameResource = new GameResource(this.getGameInstanceList(), storytellerUid);
+        final PlayResource playResource = new PlayResource(StorytellerApplication.gameInstanceList, storytellerUid);
+        final GameResource gameResource = new GameResource(StorytellerApplication.gameInstanceList, storytellerUid);
         final HistoryResource historyResource = new HistoryResource();
 
         environment.jersey().register(playResource);
@@ -48,11 +50,4 @@ public class StorytellerApplication extends Application<StorytellerConfiguration
         environment.jersey().setUrlPattern("/api/*");
     }
 
-    public List<GameInstance> getGameInstanceList() {
-        return gameInstanceList;
-    }
-
-    public void setGameInstanceList(List<GameInstance> gameInstanceList) {
-        this.gameInstanceList = gameInstanceList;
-    }
 }

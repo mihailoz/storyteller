@@ -20,6 +20,12 @@ $(function () {
         }, 4000);
 
     });
+    
+    var echoWebsocket = new WebSocket("ws://" + window.location.host + "/websocket/play");
+    
+    echoWebsocket.onopen = function (event) {
+        echoWebsocket.send("TEST MESSAGE");
+    };
 
     $("#openCreateGame").on("click",function () {
       $('#kreiraj').modal("show");
