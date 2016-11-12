@@ -35,6 +35,8 @@ public class PlayResource {
         this.setUid(uid);
     }
 
+
+    // TODO keep this method, no rework needed
     @GET
     @Timed
     public Response randomGame(@QueryParam("name") Optional<String> name) {
@@ -68,6 +70,8 @@ public class PlayResource {
         return Response.ok(playerId, MediaType.APPLICATION_JSON).build();
     }
 
+
+    // TODO remove gameStatus function, websockets make this deprecated
     @GET
     @Path("/status/{playerId}")
     public Response gameStatus(@PathParam("playerId") String playerId) {
@@ -122,6 +126,7 @@ public class PlayResource {
         }
     }
 
+    // TODO change this to websocket message with code = "play-turn"
     @POST
     @Path("/turn/{playerId}/{word}")
     public Response playTurn(@PathParam("playerId") String playerId,
@@ -215,6 +220,7 @@ public class PlayResource {
         }
     }
 
+    // TODO change this to websocket message with code = "end-game-vote"
     @POST
     @Path("/poll/{playerId}/{vote}")
     public Response pollVote(@PathParam("playerId") String playerId,
@@ -228,6 +234,8 @@ public class PlayResource {
         return Response.ok("Vote submitted", MediaType.TEXT_PLAIN).build();
     }
 
+
+    // TODO change this to websocket method @OnWebSocketClose
     @POST
     @Path("/leave/{playerId}")
     public Response leaveGame(@PathParam("playerId") String playerId) {
@@ -243,6 +251,7 @@ public class PlayResource {
         return Response.ok("Left queue", MediaType.TEXT_PLAIN).build();
     }
 
+    // TODO keep this method, no rework needed
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/words")

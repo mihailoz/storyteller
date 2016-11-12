@@ -25,7 +25,7 @@ public class GameResource {
 
     private UUID uid;
     private List<GameInstance> gameInstanceList;
-    private List<GameInstance> queueingGamesList = new ArrayList<GameInstance>();
+    public static List<GameInstance> queueingGamesList = new ArrayList<GameInstance>();
     ObjectMapper mapper = new ObjectMapper();
 
     public GameResource(List<GameInstance> games, UUID uid) {
@@ -60,6 +60,7 @@ public class GameResource {
         }
     }
 
+    // TODO remove method, websockets make this deprecated
     @GET
     @Path("/status/{playerId}")
     public Response getStatus(@PathParam("playerId") String playerId) {
@@ -163,38 +164,38 @@ public class GameResource {
         }
     }
 
-    @POST
-    @Path("/startGame/{playerId}")
-    public Response startGame(@PathParam("playerId") String playerId) {
-        try {
-            GameInstance gi = null;
-            for(GameInstance g: this.getQueueingGamesList()) {
-                if (g.getGameOwner().equals(playerId)) {
-                    gi = g;
-                }
-            }
-            if(gi != null) {
-                this.getGameInstanceList().add(gi);
-                this.getQueueingGamesList().remove(gi);
-
-                final GameInstance runGi = gi;
-
-                Runnable startGame = new Runnable() {
-                    public void run() {
-                        runGi.run();
-                    }
-                };
-
-                new Thread(startGame).start();
-
-                return Response.ok("Game started", MediaType.TEXT_PLAIN).build();
-            } else {
-                throw new Exception();
-            }
-        } catch (Exception e) {
-            return Response.ok("Game cannot be started", MediaType.TEXT_PLAIN).build();
-        }
-    }
+//    @POST
+//    @Path("/startGame/{playerId}")
+//    public Response startGame(@PathParam("playerId") String playerId) {
+//        try {
+//            GameInstance gi = null;
+//            for(GameInstance g: this.getQueueingGamesList()) {
+//                if (g.getGameOwner().equals(playerId)) {
+//                    gi = g;
+//                }
+//            }
+//            if(gi != null) {
+//                this.getGameInstanceList().add(gi);
+//                this.getQueueingGamesList().remove(gi);
+//
+//                final GameInstance runGi = gi;
+//
+//                Runnable startGame = new Runnable() {
+//                    public void run() {
+//                        runGi.run();
+//                    }
+//                };
+//
+//                new Thread(startGame).start();
+//
+//                return Response.ok("Game started", MediaType.TEXT_PLAIN).build();
+//            } else {
+//                throw new Exception();
+//            }
+//        } catch (Exception e) {
+//            return Response.ok("Game cannot be started", MediaType.TEXT_PLAIN).build();
+//        }
+//    }
 
     @GET
     @Path("/joinGame")
@@ -224,6 +225,7 @@ public class GameResource {
         }
     }
 
+    // TODO replace with @OnWebSocketClose
     @POST
     @Path("/leave/{playerId}")
     public Response leaveGame(@PathParam("playerId") String playerId) {

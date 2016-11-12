@@ -24,7 +24,15 @@ $(function () {
     var echoWebsocket = new WebSocket("ws://" + window.location.host + "/websocket/play");
     
     echoWebsocket.onopen = function (event) {
-        echoWebsocket.send("TEST MESSAGE");
+        var data = {
+            code: 'start-game',
+            playerId: 'some playerId',
+            data: {
+                'message': 'some message',
+                'message2': 'some other message'
+            }
+        };
+        echoWebsocket.send(JSON.stringify(data));
     };
 
     $("#openCreateGame").on("click",function () {
