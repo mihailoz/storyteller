@@ -87,6 +87,8 @@ public class PlaySocket {
 
                     new Thread(startGame).start();
 
+                    return WebsocketData.createSuccess("Game started.");
+
                 } else {
                     throw new Exception("Cannot start game. Game already started");
                 }
